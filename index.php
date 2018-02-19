@@ -2,5 +2,5 @@
 
 require_once 'lib/DW3Carregador.php';
 
-$app = new \Framework\DW3Aplicacao();
+$app = new \Lib\DW3Aplicacao();
 $app->rodar();

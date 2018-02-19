@@ -5,7 +5,7 @@ const URL_RAIZ = '/app/';
 
 // Os caminhos sempre devem terminar com '/'
 
-const PASTA_RAIZ = dirname(__DIR__) . '/';
+define('PASTA_RAIZ', dirname(__DIR__) . '/');
 
 const PASTA_CFG = PASTA_RAIZ . 'cfg/';
 

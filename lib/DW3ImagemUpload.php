@@ -1,5 +1,5 @@
 <?php
-namespace Framework;
+namespace Lib;
 
 const ARQUIVO_NOME = 'tmp_name';
 const TAMANHO = 'size';

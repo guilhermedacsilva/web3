@@ -1,8 +1,8 @@
 <?php
-namespace Model;
+namespace Modelo;
 
 use \PDO;
-use \Framework\DW3BancoDeDados;
+use \Lib\DW3BancoDeDados;
 
 class Mensagem
 {

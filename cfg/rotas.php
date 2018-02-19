@@ -2,24 +2,24 @@
 
 $rotas = [
     '/' => [
-        'GET' => '\Controller\RaizController#index',
+        'GET' => '\Controlador\RaizControlador#index',
     ],
     '/login' => [
-        'GET' => '\Controller\LoginController#create',
-        'POST' => '\Controller\LoginController#store',
-        'DELETE' => '\Controller\LoginController#destroy',
+        'GET' => '\Controlador\LoginControlador#create',
+        'POST' => '\Controlador\LoginControlador#store',
+        'DELETE' => '\Controlador\LoginControlador#destroy',
     ],
     '/usuarios' => [
-        'POST' => '\Controller\UsuarioController#store',
+        'POST' => '\Controlador\UsuarioControlador#store',
     ],
     '/usuarios/create' => [
-        'GET' => '\Controller\UsuarioController#create',
+        'GET' => '\Controlador\UsuarioControlador#create',
     ],
     '/usuarios/sucesso' => [
-        'GET' => '\Controller\UsuarioController#sucesso',
+        'GET' => '\Controlador\UsuarioControlador#sucesso',
     ],
     '/mensagens' => [
-        'GET' => '\Controller\MensagemController#index',
-        'POST' => '\Controller\MensagemController#store',
+        'GET' => '\Controlador\MensagemControlador#index',
+        'POST' => '\Controlador\MensagemControlador#store',
     ],
 ];

@@ -1,9 +1,20 @@
 <?php
 require_once 'cfg/geral.php';
 
+function iniciaCom($texto, $palavra)
+{
+	return substr($texto, 0, strlen($palavra)) === $palavra;
+}
+
 function carregarArquivoDaClasse($nomeDaClasse)
 {
-    require_once PASTA_RAIZ . str_replace('\\', '/', $nomeDaClasse) . '.php';
+	if (iniciaCom($nomeDaClasse, 'Lib\\')) {
+		$nomeDaClasse = substr($nomeDaClasse, 4);
+		require_once PASTA_LIB . $nomeDaClasse . '.php';
+
+	} else {
+		require_once PASTA_MVC . str_replace('\\', '/', $nomeDaClasse) . '.php';
+	}
 }
 
 spl_autoload_register('carregarArquivoDaClasse');

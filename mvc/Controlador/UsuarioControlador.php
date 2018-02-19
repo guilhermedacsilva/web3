@@ -1,11 +1,11 @@
 <?php
-namespace Controller;
+namespace Controlador;
 
-use \Model\Usuario;
+use \Modelo\Usuario;
 
 const VIEW_USUARIO = PASTA_VISAO . 'usuarios/';
 
-class UsuarioController
+class UsuarioControlador
 {
     public function create()
     {

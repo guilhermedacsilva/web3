@@ -1,7 +1,7 @@
 <?php
-namespace Framework;
+namespace Lib;
 
-class Sessao
+class DW3Sessao
 {
     public static function get($chave, $valorPadrao = null)
     {

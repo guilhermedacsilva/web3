@@ -1,9 +1,9 @@
 <?php
-namespace Model;
+namespace Modelo;
 
 use \PDO;
-use \Framework\DW3BancoDeDados;
-use \Framework\DW3ImagemUpload;
+use \Lib\DW3BancoDeDados;
+use \Lib\DW3ImagemUpload;
 
 class Usuario
 {

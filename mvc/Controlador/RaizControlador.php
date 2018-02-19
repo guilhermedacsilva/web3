@@ -1,7 +1,7 @@
 <?php
-namespace Controller;
+namespace Controlador;
 
-class RaizController
+class RaizControlador
 {
     public function index()
     {

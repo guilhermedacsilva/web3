@@ -1,12 +1,12 @@
 <?php
-namespace Framework;
+namespace Lib;
 
-class Roteador
+class DW3Roteador
 {
     /* sempre inicia com uma barra
         sempre termina sem uma barra */
-    protected $raizRelativa;
-    protected $rotas;
+    private $raizRelativa;
+    private $rotas;
 
     public function __construct()
     {
@@ -21,9 +21,9 @@ class Roteador
         return $this->recuperarRota($caminhoRota);
     }
 
-    protected function carregarRotas()
+    private function carregarRotas()
     {
-        require PASTA_RAIZ . 'Configuracao/rotas.php';
+        require PASTA_CFG . 'rotas.php';
         foreach ($rotas as $chave => $valor) {
             if (strpos($chave, '?') !== false) {
                 $corpoRegex = preg_quote($chave, '/');
@@ -34,12 +34,12 @@ class Roteador
         return $rotas;
     }
 
-    protected function removerRaizRelativa($caminhoRequisicao)
+    private function removerRaizRelativa($caminhoRequisicao)
     {
         return substr($caminhoRequisicao, strlen($this->raizRelativa));
     }
 
-    protected function recuperarRota($caminhoRota)
+    private function recuperarRota($caminhoRota)
     {
         if (array_key_exists($caminhoRota, $this->rotas)) {
             $rota = $this->rotas[$caminhoRota];
@@ -57,7 +57,7 @@ class Roteador
         return false;
     }
 
-    protected function testarRotaRegex($caminhoRota, $rota)
+    private function testarRotaRegex($caminhoRota, $rota)
     {
         if (array_key_exists('regex', $rota)) {
             preg_match($rota['regex'], $caminhoRota, $resultados);
@@ -67,7 +67,7 @@ class Roteador
         }
     }
 
-    protected function recuperarRotaComRegex($regexResultado, $rota)
+    private function recuperarRotaComRegex($regexResultado, $rota)
     {
         $rotaString = $this->recuperarRotaPorMetodo($rota);
         if ($rotaString) {
@@ -81,7 +81,7 @@ class Roteador
         return false;
     }
 
-    protected function recuperarRotaPorMetodo($rota)
+    private function recuperarRotaPorMetodo($rota)
     {
         $requisicaoMetodo = $_SERVER['REQUEST_METHOD'];
         if ($requisicaoMetodo == 'POST'

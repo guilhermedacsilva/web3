@@ -1,13 +1,13 @@
 <?php
-namespace Framework;
+namespace Lib;
 
 class DW3Aplicacao
 {
-    protected $roteador;
+    private $roteador;
 
     public function __construct()
     {
-        $this->iniciarRoteador();
+        $this->roteador = new DW3Roteador();
     }
 
     public function rodar()
@@ -20,12 +20,7 @@ class DW3Aplicacao
         $this->executarControlador($rotaArray);
     }
 
-    protected function iniciarRoteador()
-    {
-        $this->roteador = new Roteador();
-    }
-
-    protected function executarControlador($parametros)
+    private function executarControlador($parametros)
     {
         $controladorString = array_pop($parametros);
         $controladorArray = explode('#', $controladorString);

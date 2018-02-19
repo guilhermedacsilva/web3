@@ -1,10 +1,10 @@
 <?php
-namespace Controller;
+namespace Controlador;
 
-use \Framework\Sessao;
-use \Model\Mensagem;
+use \Lib\DW3Sessao;
+use \Modelo\Mensagem;
 
-class MensagemController
+class MensagemControlador
 {
     public function index()
     {
@@ -17,7 +17,7 @@ class MensagemController
     {
         $this->verificarLogado();
         $mensagem = new Mensagem(
-            Sessao::get('usuario'),
+            DW3Sessao::get('usuario'),
             $_POST['texto']
         );
         $mensagem->save();
@@ -27,7 +27,7 @@ class MensagemController
 
     private function verificarLogado()
     {
-        if (Sessao::get('usuario') === null) {
+        if (DW3Sessao::get('usuario') === null) {
             header('Location: ' . URL_RAIZ . 'login');
             exit;
         }
