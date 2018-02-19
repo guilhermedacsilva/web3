@@ -7,6 +7,7 @@ class DW3Roteador
         sempre termina sem uma barra */
     private $raizRelativa;
     private $rotas;
+    private $resultado;
 
     public function __construct()
     {
@@ -14,31 +15,46 @@ class DW3Roteador
         $this->raizRelativa = substr(URL_RAIZ, 0, -1);
     }
 
-    public function interpretarRota()
-    {
-        $caminhoRequisicao = $_SERVER['REQUEST_URI'];
-        $caminhoRota = $this->removerRaizRelativa($caminhoRequisicao);
-        return $this->recuperarRota($caminhoRota);
-    }
-
     private function carregarRotas()
     {
         require PASTA_CFG . 'rotas.php';
         foreach ($rotas as $chave => $valor) {
-            if (strpos($chave, '?') !== false) {
-                $corpoRegex = preg_quote($chave, '/');
-                $corpoRegex = str_replace('\?', '([^\/]+)', $corpoRegex);
-                $rotas[$chave]['regex'] = "/^$corpoRegex$/";
-            }
+            $this->gerarRotaRegex($rotas, $chave);
         }
         return $rotas;
     }
 
-    private function removerRaizRelativa($caminhoRequisicao)
+    private function gerarRotaRegex(&$rotas, $chave)
+    {
+        if (strpos($chave, '?') !== false) {
+            $corpoRegex = preg_quote($chave, '/');
+            $corpoRegex = str_replace('\?', '([^\/]+)', $corpoRegex);
+            $rotas[$chave]['regex'] = "/^$corpoRegex$/";
+        }
+    }
+
+    public function getResultado()
+    {
+        return $this->resultado;
+    }
+
+    public function interpretarRota()
+    {
+        // exemplo: /app/login
+        $caminhoRequisicao = $_SERVER['REQUEST_URI'];
+
+        // exemplo: /login
+        $caminhoRota = $this->removerUrlRaiz($caminhoRequisicao);
+        
+        $this->resultado = $this->recuperarRota($caminhoRota);
+    }
+
+    private function removerUrlRaiz($caminhoRequisicao)
     {
         return substr($caminhoRequisicao, strlen($this->raizRelativa));
     }
 
+    // exemplo de $caminhoRota: /login
     private function recuperarRota($caminhoRota)
     {
         if (array_key_exists($caminhoRota, $this->rotas)) {

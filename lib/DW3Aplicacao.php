@@ -12,20 +12,41 @@ class DW3Aplicacao
 
     public function rodar()
     {
-        $rotaArray = $this->roteador->interpretarRota();
-        if ($rotaArray === false) {
+        $this->interpretarRota();
+        $this->executarControlador();
+    }
+
+    private function interpretarRota()
+    {
+        $this->roteador->interpretarRota();
+        if ($this->roteador->getResultado() === false) {
             echo 'Rota não encontrada.';
             exit;
         }
-        $this->executarControlador($rotaArray);
     }
 
-    private function executarControlador($parametros)
+    /* Formato do resultado do roteador
+    [
+        0,1,2... => parâmetros para serem passados da rota para o controlador...
+        último => 'NomeDoControlador#métodoParaExecutar',
+    ]
+    */
+    private function executarControlador()
     {
-        $controladorString = array_pop($parametros);
+        $rotaResultado = $this->roteador->getResultado();
+        $controladorString = array_pop($rotaResultado);
         $controladorArray = explode('#', $controladorString);
-        $controladorNome = $controladorArray[0];
-        $metodoNome = $controladorArray[1];
+        $this->rodarControladorComParametros(
+            $controladorArray[0],
+            $controladorArray[1],
+            $rotaResultado);
+    }
+
+    private function rodarControladorComParametros(
+        $controladorNome,
+        $metodoNome,
+        $parametros)
+    {
         $objetoControlador = new $controladorNome();
         $metodoArray = [$objetoControlador, $metodoNome];
         call_user_func_array($metodoArray, $parametros);
