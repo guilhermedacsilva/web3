@@ -1,0 +1,20 @@
+.site {
+    width: 800px;
+}
+
+.margin-bottom {
+    margin-bottom: 1em;
+}
+
+.margin-right {
+    margin-right: 1em;
+}
+
+.campo-grande {
+    width: 550px!important;
+}
+
+.imagem-usuario {
+    width: 5em;
+    margin-right: 1em;
+}
