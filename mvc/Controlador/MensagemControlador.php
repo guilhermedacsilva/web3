@@ -4,13 +4,13 @@ namespace Controlador;
 use \Lib\DW3Sessao;
 use \Modelo\Mensagem;
 
-class MensagemControlador
+class MensagemControlador extends Controlador
 {
     public function index()
     {
         $this->verificarLogado();
         $mensagens = Mensagem::all();
-        require PASTA_VISAO . 'mensagens/index.php';
+        $this->visao('mensagens/index.php', compact('mensagens'));
     }
 
     public function store()

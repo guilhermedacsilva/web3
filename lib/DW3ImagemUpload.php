@@ -10,7 +10,7 @@ class DW3ImagemUpload
     const TIPOS_PERMITIDOS = [
         IMAGETYPE_JPEG,
         // IMAGETYPE_PNG,
-        // IMAGETYPE_GIF
+        // IMAGETYPE_GIF,
     ];
 
     public static function isValida($arquivo)

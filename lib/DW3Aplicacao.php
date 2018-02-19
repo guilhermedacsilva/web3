@@ -10,7 +10,7 @@ class DW3Aplicacao
         $this->roteador = new DW3Roteador();
     }
 
-    public function rodar()
+    public function executar()
     {
         $this->interpretarRota();
         $this->executarControlador();

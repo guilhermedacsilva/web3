@@ -1,16 +1,14 @@
 <?php
 namespace Controlador;
 
-use \Modelo\Usuario;
 use \Lib\DW3Sessao;
+use \Modelo\Usuario;
 
-const VIEW_LOGIN = PASTA_VISAO . 'login/';
-
-class LoginControlador
+class LoginControlador extends Controlador
 {
     public function create()
     {
-        require VIEW_LOGIN . 'create.php';
+        $this->visao('login/create.php');
     }
 
     public function store()

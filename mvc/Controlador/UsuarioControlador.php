@@ -5,7 +5,7 @@ use \Modelo\Usuario;
 
 const VIEW_USUARIO = PASTA_VISAO . 'usuarios/';
 
-class UsuarioControlador
+class UsuarioControlador extends Controlador
 {
     public function create()
     {
