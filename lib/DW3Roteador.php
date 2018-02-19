@@ -46,6 +46,7 @@ class DW3Roteador
         // exemplo: /login
         $caminhoRota = $this->removerUrlRaiz($caminhoRequisicao);
         
+        // classe DW3Rota
         $this->resultado = $this->recuperarRota($caminhoRota);
     }
 
@@ -57,47 +58,72 @@ class DW3Roteador
     // exemplo de $caminhoRota: /login
     private function recuperarRota($caminhoRota)
     {
-        if (array_key_exists($caminhoRota, $this->rotas)) {
-            $rota = $this->rotas[$caminhoRota];
-            $rotaString = $this->recuperarRotaPorMetodo($rota);
-            return $rotaString ? [$rotaString] : false;
+        if ($this->existeRotaEstatica($caminhoRota)) {
+            return $this->recuperarRotaEstatica($caminhoRota);
+        }
 
-        } else {
-            foreach ($this->rotas as $rota) {
-                $resultado = $this->testarRotaRegex($caminhoRota, $rota);
-                if ($resultado) {
-                    return $resultado;
-                }
+        // exemplo: /produtos/?
+        return $this->tentarRecuperarRotaDinamica($caminhoRota);
+    }
+
+    private function existeRotaEstatica($caminhoRota)
+    {
+        return array_key_exists($caminhoRota, $this->rotas);
+    }
+
+    private function recuperarRotaEstatica($caminhoRota)
+    {
+        $rota = $this->rotas[$caminhoRota];
+
+        // exemplo: \Controlador\LoginControlador#create
+        $rotaString = $this->recuperarRotaPorMetodoHttp($rota);
+
+        return $rotaString ? new DW3Rota($rotaString) : false;
+    }
+
+    private function tentarRecuperarRotaDinamica($caminhoRota)
+    {
+        foreach ($this->rotas as $rota) {
+            // $resultado é um objeto DW3Rota ou false
+            $resultado = $this->tentarAplicarRegex($caminhoRota, $rota);
+
+            if ($resultado) {
+                return $resultado;
             }
         }
         return false;
     }
 
-    private function testarRotaRegex($caminhoRota, $rota)
+    private function tentarAplicarRegex($caminhoRota, $rota)
     {
         if (array_key_exists('regex', $rota)) {
-            preg_match($rota['regex'], $caminhoRota, $resultados);
-            if (!empty($resultados)) {
-                return $this->recuperarRotaComRegex($resultados, $rota);
+            preg_match($rota['regex'], $caminhoRota, $resultadoRegexArray);
+            if (!empty($resultadoRegexArray)) {
+                /* exemplo de resultadoRegexArray:
+                [
+                    0 => '/produtos/99',
+                    1 => 99
+                ]
+                */
+                return $this->recuperarRotaDinamica($resultadoRegexArray, $rota);
             }
-        }
-    }
-
-    private function recuperarRotaComRegex($regexResultado, $rota)
-    {
-        $rotaString = $this->recuperarRotaPorMetodo($rota);
-        if ($rotaString) {
-            array_shift($regexResultado);
-            if (!empty($regexResultado)) {
-                array_push($regexResultado, $rotaString);
-                return $regexResultado;
-            }
-            return [$rotaString];
         }
         return false;
     }
 
-    private function recuperarRotaPorMetodo($rota)
+    private function recuperarRotaDinamica($regexResultado, $rota)
+    {
+        $rotaString = $this->recuperarRotaPorMetodoHttp($rota);
+        if ($rotaString) {
+            // remove o primeiro elemento
+            array_shift($regexResultado);
+
+            return new DW3Rota($rotaString, $regexResultado);
+        }
+        return false;
+    }
+
+    private function recuperarRotaPorMetodoHttp($rota)
     {
         $requisicaoMetodo = $_SERVER['REQUEST_METHOD'];
         if ($requisicaoMetodo == 'POST'

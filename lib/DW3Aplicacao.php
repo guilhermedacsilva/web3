@@ -19,36 +19,23 @@ class DW3Aplicacao
     private function interpretarRota()
     {
         $this->roteador->interpretarRota();
-        if ($this->roteador->getResultado() === false) {
+        if (!$this->roteador->getResultado()) {
             echo 'Rota não encontrada.';
             exit;
         }
     }
 
-    /* Formato do resultado do roteador
-    [
-        0,1,2... => parâmetros para serem passados da rota para o controlador...
-        último => 'NomeDoControlador#métodoParaExecutar',
-    ]
-    */
     private function executarControlador()
     {
-        $rotaResultado = $this->roteador->getResultado();
-        $controladorString = array_pop($rotaResultado);
-        $controladorArray = explode('#', $controladorString);
-        $this->rodarControladorComParametros(
-            $controladorArray[0],
-            $controladorArray[1],
-            $rotaResultado);
-    }
-
-    private function rodarControladorComParametros(
-        $controladorNome,
-        $metodoNome,
-        $parametros)
-    {
-        $objetoControlador = new $controladorNome();
-        $metodoArray = [$objetoControlador, $metodoNome];
-        call_user_func_array($metodoArray, $parametros);
+        $rota = $this->roteador->getResultado();
+        $controladorNome = $rota->getControlador();
+        
+        // um objeto pode ser instanciado com uma classe ou uma string
+        $objetoControlador = new $controladorNome;
+        
+        $metodoArray = [$objetoControlador, $rota->getMetodo()];
+        
+        // executa um método passando parâmetros
+        call_user_func_array($metodoArray, $rota->getParametros());
     }
 }
