@@ -18,6 +18,8 @@ const PASTA_VISAO = PASTA_MVC . 'Visao/';
 
 const PASTA_PUBLICO = PASTA_RAIZ . 'publico/';
 
+const PASTA_TESTES = PASTA_RAIZ . 'testes/';
+
 const URL_PUBLIC = URL_RAIZ . 'publico/';
 const URL_CSS = URL_PUBLIC . 'css/';
 const URL_FONTS = URL_PUBLIC . 'fonts/';
