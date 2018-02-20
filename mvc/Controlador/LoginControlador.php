@@ -17,10 +17,11 @@ class LoginControlador extends Controlador
         if ($usuario && $usuario->verificarSenha($_POST['senha'])) {
             DW3Sessao::set('usuario', $usuario->getId());
             header('Location: ' . URL_RAIZ . 'mensagens');
+            exit;
         } else {
-            header('Location: ' . URL_RAIZ . 'login');
+            $this->setErros(['login' => 'Usuário ou senha inválido.']);
+            $this->visao('login/criar.php');
         }
-        exit;
     }
 
     public function destruir()

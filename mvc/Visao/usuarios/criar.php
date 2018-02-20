@@ -3,17 +3,17 @@
         <h1 class="text-center">Cadastre-se no Chat!</h1>
         <form action="<?= URL_RAIZ . 'usuarios' ?>" method="post" class="margin-bottom" enctype="multipart/form-data">
             <div class="form-group <?= $this->getErroCss('email') ?>">
-                <label for="email">E-mail</label>
+                <label class="control-label" for="email">E-mail *</label>
                 <?php $this->incluirVisao('util/formErro.php', ['campo' => 'email']) ?>
                 <input id="email" name="email" class="form-control" autofocus value="<?= $this->getPost('email') ?>">
             </div>
             <div class="form-group <?= $this->getErroCss('senha') ?>">
-                <label for="senha">Senha</label>
+                <label class="control-label" for="senha">Senha *</label>
                 <?php $this->incluirVisao('util/formErro.php', ['campo' => 'senha']) ?>
                 <input id="senha" name="senha" class="form-control" type="password">
             </div>
             <div class="form-group <?= $this->getErroCss('foto') ?>">
-                <label for="foto">Foto</label>
+                <label class="control-label" for="foto">Foto</label>
                 <?php $this->incluirVisao('util/formErro.php', ['campo' => 'foto']) ?>
                 <input id="foto" name="foto" class="form-control" type="file">
             </div>

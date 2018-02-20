@@ -21,6 +21,7 @@ abstract class DW3Controlador
 			$this->visaoDados = $__dados;
 			require PASTA_VISAO . 'templates/' . $this->visaoTemplate;
 		}
+		exit;
 	}
 
 	protected function imprimirConteudo()
