@@ -29,6 +29,11 @@ class Usuario extends Modelo
         $this->senha = password_hash($senha, PASSWORD_BCRYPT);
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
     public function getEmail()
     {
         return $this->email;
