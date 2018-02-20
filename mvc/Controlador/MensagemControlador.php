@@ -22,9 +22,17 @@ class MensagemControlador extends Controlador
             DW3Sessao::get('usuario'),
             $_POST['texto']
         );
-        $mensagem->save();
-        header('Location: ' . URL_RAIZ . 'mensagens');
-        exit;
+        if ($mensagem->isValido()) {
+            $mensagem->save();
+            header('Location: ' . URL_RAIZ . 'mensagens');
+            exit;
+
+        } else {
+            $this->setErros($mensagem->getValidacaoErros());
+            $this->visao('mensagens/index.php', [
+                'mensagens' => Mensagem::all()
+            ]);
+        }
     }
 
     private function verificarLogado()

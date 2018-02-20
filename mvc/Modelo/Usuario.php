@@ -3,9 +3,10 @@ namespace Modelo;
 
 use \PDO;
 use \Lib\DW3BancoDeDados;
+use \Lib\DW3Modelo;
 use \Lib\DW3ImagemUpload;
 
-class Usuario
+class Usuario extends DW3Modelo
 {
     const BUSCAR_TODOS = 'SELECT * FROM usuarios ORDER BY email';
     const BUSCAR_POR_EMAIL = 'SELECT * FROM usuarios WHERE email = ? LIMIT 1';
@@ -13,6 +14,7 @@ class Usuario
     private $id;
     private $email;
     private $senha;
+    private $senhaPlana;
     private $foto;
 
     public function __construct(
@@ -24,6 +26,7 @@ class Usuario
         $this->id = $id;
         $this->email = $email;
         $this->foto = $foto;
+        $this->senhaPlana = $senha;
         $this->setSenha($senha);
     }
 
@@ -61,6 +64,20 @@ class Usuario
         return password_verify($senhaPlana, $this->senha);
     }
 
+    protected function verificarErros()
+    {
+        if (strlen($this->email) < 3) {
+            $this->setErroMensagem('email', 'Deve ter no mínimo 3 caracteres.');
+        }
+        if (strlen($this->senhaPlana) < 3) {
+            $this->setErroMensagem('senha', 'Deve ter no mínimo 3 caracteres.');
+        }
+        if (DW3ImagemUpload::existeUpload($this->foto)
+            && !DW3ImagemUpload::isValida($this->foto)) {
+            $this->setErroMensagem('foto', 'Deve ser JPG de no máximo 500 KB.');
+        }
+    }
+
     public function save()
     {
         $this->inserir();
@@ -84,21 +101,6 @@ class Usuario
             $nomeCompleto = PASTA_PUBLICO . "img/{$this->id}.jpg";
             DW3ImagemUpload::salvar($this->foto, $nomeCompleto);
         }
-    }
-
-    public static function all()
-    {
-        $registros = DW3BancoDeDados::query(self::BUSCAR_TODOS);
-        $objetos = [];
-        foreach ($registros as $registro) {
-            $objetos[] = new Usuario(
-                $registro['nome'],
-                $registro['descricao'],
-                $registro['id'],
-                $registro['votos']
-            );
-        }
-        return $objetos;
     }
 
     public static function findEmail($email)

@@ -14,6 +14,14 @@ class DW3ImagemUpload
     const KILOBYTE = 1024;
     const TAMANHO_MAXIMO = 500 * self::KILOBYTE;
 
+    // verifica se foi feito o upload
+    public static function existeUpload($arquivoUpload)
+    {
+        return $arquivoUpload != null
+            && $arquivoUpload[self::TAMANHO] > 0;
+    }
+
+    // verifica se tudo é valido
     public static function isValida($arquivo)
     {
         return self::isArquivoImagem($arquivo)
@@ -24,7 +32,7 @@ class DW3ImagemUpload
     {
         /* verifica se é uma imagem
            pode ocorrer falso positivo */
-        return $arquivoUpload != null
+        return self::existeUpload($arquivoUpload)
             && getimagesize($arquivoUpload[self::ARQUIVO_NOME]);
     }
 

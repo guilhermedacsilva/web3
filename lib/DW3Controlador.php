@@ -1,8 +1,10 @@
 <?php
 namespace Lib;
 
-class DW3Controlador
+abstract class DW3Controlador
 {
+	use DW3ControladorVisao;
+
 	protected $visaoTemplate = 'index.php';
 	protected $visaoConteudo;
 	protected $visaoDados;
@@ -25,5 +27,14 @@ class DW3Controlador
 	{
 		extract($this->visaoDados);
 		require PASTA_VISAO . $this->visaoConteudo;
+	}
+
+	/* dados: deve ser um vetor com chaves e valores
+	*/
+	protected function incluirVisao($__nomeArquivo, $__dados = [])
+	{
+		extract($this->visaoDados);
+		extract($__dados);
+		require PASTA_VISAO . $__nomeArquivo;
 	}
 }

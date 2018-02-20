@@ -3,8 +3,9 @@ namespace Modelo;
 
 use \PDO;
 use \Lib\DW3BancoDeDados;
+use \Lib\DW3Modelo;
 
-class Mensagem
+class Mensagem extends DW3Modelo
 {
     const BUSCAR_TODOS = 'SELECT m.texto, u.id, u.email FROM mensagens m JOIN usuarios u ON (m.usuario_id = u.id) ORDER BY m.id';
     const INSERIR = 'INSERT INTO mensagens(usuario_id,texto) VALUES (?, ?)';
@@ -68,5 +69,12 @@ class Mensagem
             );
         }
         return $objetos;
+    }
+
+    protected function verificarErros()
+    {
+        if (strlen($this->texto) < 3) {
+            $this->setErroMensagem('texto', 'Mínimo 3 caracteres.');
+        }
     }
 }

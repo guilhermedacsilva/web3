@@ -3,10 +3,11 @@
     <h2>Escreva a mensagem</h2>
     <div class="margin-bottom">
         <form action="<?= URL_RAIZ . 'mensagens' ?>" method="post" class="form-inline pull-left margin-right">
-            <div class="form-group">
+            <div class="form-group <?= $this->getErroCss('texto') ?>">
                 <input id="texto" name="texto" class="form-control campo-grande" autofocus placeholder="Texto">
             </div>
             <button type="submit" class="btn btn-default">Enviar mensagem</button>
+            <?php $this->incluirVisao('util/formErro.php', ['campo' => 'texto']) ?>
         </form>
         <form action="<?= URL_RAIZ . 'login' ?>" method="post">
             <input type="hidden" name="_metodo" value="DELETE">
