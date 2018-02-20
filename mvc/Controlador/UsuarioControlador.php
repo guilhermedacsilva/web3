@@ -3,8 +3,6 @@ namespace Controlador;
 
 use \Modelo\Usuario;
 
-const VIEW_USUARIO = PASTA_VISAO . 'usuarios/';
-
 class UsuarioControlador extends Controlador
 {
     public function create()
@@ -27,6 +25,6 @@ class UsuarioControlador extends Controlador
 
     public function sucesso()
     {
-        require VIEW_USUARIO . 'sucesso.php';
+        $this->visao('usuarios/sucesso.php');
     }
 }
