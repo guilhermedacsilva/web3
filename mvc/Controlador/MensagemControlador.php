@@ -10,7 +10,9 @@ class MensagemControlador extends Controlador
     {
         $this->verificarLogado();
         $mensagens = Mensagem::all();
-        $this->visao('mensagens/index.php', compact('mensagens'));
+        $this->visao('mensagens/index.php', [
+            'mensagens' => $mensagens
+        ]);
     }
 
     public function store()

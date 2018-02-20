@@ -81,7 +81,7 @@ class Usuario
     private function salvarImagem()
     {
         if (DW3ImagemUpload::isValida($this->foto)) {
-            $nomeCompleto = PASTA_RAIZ . "Public/img/{$this->id}.jpg";
+            $nomeCompleto = PASTA_PUBLICO . "img/{$this->id}.jpg";
             DW3ImagemUpload::salvar($this->foto, $nomeCompleto);
         }
     }

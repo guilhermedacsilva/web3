@@ -1,10 +1,6 @@
 <?php
 namespace Lib;
 
-const ARQUIVO_NOME = 'tmp_name';
-const TAMANHO = 'size';
-const KILOBYTE = 1024;
-
 class DW3ImagemUpload
 {
     const TIPOS_PERMITIDOS = [
@@ -13,32 +9,40 @@ class DW3ImagemUpload
         // IMAGETYPE_GIF,
     ];
 
+    const ARQUIVO_NOME = 'tmp_name';
+    const TAMANHO = 'size';
+    const KILOBYTE = 1024;
+    const TAMANHO_MAXIMO = 500 * self::KILOBYTE;
+
     public static function isValida($arquivo)
     {
-        if ($arquivo == null) {
+        return self::isArquivoImagem($arquivo)
+            && $arquivo[self::TAMANHO] <= self::TAMANHO_MAXIMO;
+    }
+
+    private static function isArquivoImagem($arquivoUpload)
+    {
+        /* verifica se é uma imagem
+           pode ocorrer falso positivo */
+        return $arquivoUpload != null
+            && getimagesize($arquivoUpload[self::ARQUIVO_NOME]);
+    }
+
+    private static function isTipoPermitido($arquivoUpload)
+    {
+        $imagemTipo = exif_imagetype($arquivo[self::ARQUIVO_NOME]);
+        if (!in_array($imagemTipo, self::TIPOS_PERMITIDOS)) {
             return false;
         }
-        $valida = getimagesize($arquivo[ARQUIVO_NOME]);
-        if ($valida === false) {
-            return false;
-        }
-        if ($arquivo[TAMANHO] > 500 * KILOBYTE) {
-            return false;
-        }
-        $tipo = exif_imagetype($arquivo[ARQUIVO_NOME]);
-        if (!in_array($tipo, self::TIPOS_PERMITIDOS)) {
-            return false;
-        }
-        return true;
     }
 
     public static function salvar($arquivo, $destino)
     {
-        move_uploaded_file($arquivo[ARQUIVO_NOME], $destino);
+        move_uploaded_file($arquivo[self::ARQUIVO_NOME], $destino);
     }
 
     public static function existe($imagemNome)
     {
-        return file_exists(PASTA_RAIZ . "Public/img/$imagemNome");
+        return file_exists(PASTA_PUBLICO . "img/$imagemNome");
     }
 }

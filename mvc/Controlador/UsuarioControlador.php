@@ -9,7 +9,7 @@ class UsuarioControlador extends Controlador
 {
     public function create()
     {
-        require VIEW_USUARIO . 'create.php';
+        $this->visao('usuarios/create.php');
     }
 
     public function store()
