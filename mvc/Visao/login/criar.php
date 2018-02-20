@@ -4,7 +4,7 @@
         <form action="<?= URL_RAIZ . 'login' ?>" method="post" class="margin-bottom">
             <div class="form-group <?= $this->getErroCss('login') ?>">
                 <label class="control-label" for="email">E-mail</label>
-                <input id="email" name="email" class="form-control" autofocus>
+                <input id="email" name="email" class="form-control" autofocus value="<?= $this->getPost('email') ?>">
             </div>
             <div class="form-group <?= $this->getErroCss('login') ?>">
                 <label class="control-label" for="senha">Senha</label>
