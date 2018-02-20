@@ -3,10 +3,9 @@ namespace Modelo;
 
 use \PDO;
 use \Lib\DW3BancoDeDados;
-use \Lib\DW3Modelo;
 use \Lib\DW3ImagemUpload;
 
-class Usuario extends DW3Modelo
+class Usuario extends Modelo
 {
     const BUSCAR_TODOS = 'SELECT * FROM usuarios ORDER BY email';
     const BUSCAR_POR_EMAIL = 'SELECT * FROM usuarios WHERE email = ? LIMIT 1';

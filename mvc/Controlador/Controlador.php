@@ -2,8 +2,9 @@
 namespace Controlador;
 
 use \Lib\DW3Controlador;
+use \Lib\DW3Sessao;
 
-class Controlador extends DW3Controlador
+abstract class Controlador extends DW3Controlador
 {
     protected function verificarLogado()
     {

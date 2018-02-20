@@ -4,7 +4,7 @@
     <div class="margin-bottom">
         <form action="<?= URL_RAIZ . 'mensagens' ?>" method="post" class="form-inline pull-left margin-right">
             <div class="form-group <?= $this->getErroCss('texto') ?>">
-                <input id="texto" name="texto" class="form-control campo-grande" autofocus placeholder="Texto">
+                <input id="texto" name="texto" class="form-control campo-grande" autofocus placeholder="Texto" value="<?= $this->getPost('texto') ?>">
             </div>
             <button type="submit" class="btn btn-default">Enviar mensagem</button>
             <?php $this->incluirVisao('util/formErro.php', ['campo' => 'texto']) ?>
