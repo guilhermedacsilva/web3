@@ -6,12 +6,12 @@ use \Modelo\Usuario;
 
 class LoginControlador extends Controlador
 {
-    public function create()
+    public function criar()
     {
-        $this->visao('login/create.php');
+        $this->visao('login/criar.php');
     }
 
-    public function store()
+    public function armazenar()
     {
         $usuario = Usuario::buscarEmail($_POST['email']);
         if ($usuario && $usuario->verificarSenha($_POST['senha'])) {
@@ -23,7 +23,7 @@ class LoginControlador extends Controlador
         exit;
     }
 
-    public function destroy()
+    public function destruir()
     {
         DW3Sessao::deletar('usuario');
         header('Location: ' . URL_RAIZ . 'login');

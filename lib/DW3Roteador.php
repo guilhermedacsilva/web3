@@ -75,7 +75,7 @@ class DW3Roteador
     {
         $rota = $this->rotas[$caminhoRota];
 
-        // exemplo: \Controlador\LoginControlador#create
+        // exemplo: \Controlador\LoginControlador#criar
         $rotaString = $this->recuperarRotaPorMetodoHttp($rota);
 
         return $rotaString ? new DW3Rota($rotaString) : false;

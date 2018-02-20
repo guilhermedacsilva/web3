@@ -13,7 +13,7 @@
             <button type="submit" class="btn btn-default center-block">Entrar</button>
         </form>
         <p class="text-center">
-            <a href="<?= URL_RAIZ . 'usuarios/create' ?>">Não tem um usuário? Cadastrar-se aqui!</a>
+            <a href="<?= URL_RAIZ . 'usuarios/criar' ?>">Não tem um usuário? Cadastrar-se aqui!</a>
         </p>
     </div>
 </div>

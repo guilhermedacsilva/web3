@@ -5,12 +5,12 @@ use \Modelo\Usuario;
 
 class UsuarioControlador extends Controlador
 {
-    public function create()
+    public function criar()
     {
-        $this->visao('usuarios/create.php');
+        $this->visao('usuarios/criar.php');
     }
 
-    public function store()
+    public function armazenar()
     {
         $foto = array_key_exists('foto', $_FILES) ? $_FILES['foto'] : null;
         $usuario = new Usuario($_POST['email'], $_POST['senha'], $foto);
@@ -22,7 +22,7 @@ class UsuarioControlador extends Controlador
 
         } else {
             $this->setErros($usuario->getValidacaoErros());
-            $this->visao('usuarios/create.php');
+            $this->visao('usuarios/criar.php');
         }
     }
 

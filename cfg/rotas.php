@@ -5,21 +5,21 @@ $rotas = [
         'GET' => '\Controlador\RaizControlador#index',
     ],
     '/login' => [
-        'GET' => '\Controlador\LoginControlador#create',
-        'POST' => '\Controlador\LoginControlador#store',
-        'DELETE' => '\Controlador\LoginControlador#destroy',
+        'GET' => '\Controlador\LoginControlador#criar',
+        'POST' => '\Controlador\LoginControlador#armazenar',
+        'DELETE' => '\Controlador\LoginControlador#destruir',
     ],
     '/usuarios' => [
-        'POST' => '\Controlador\UsuarioControlador#store',
+        'POST' => '\Controlador\UsuarioControlador#armazenar',
     ],
-    '/usuarios/create' => [
-        'GET' => '\Controlador\UsuarioControlador#create',
+    '/usuarios/criar' => [
+        'GET' => '\Controlador\UsuarioControlador#criar',
     ],
     '/usuarios/sucesso' => [
         'GET' => '\Controlador\UsuarioControlador#sucesso',
     ],
     '/mensagens' => [
         'GET' => '\Controlador\MensagemControlador#index',
-        'POST' => '\Controlador\MensagemControlador#store',
+        'POST' => '\Controlador\MensagemControlador#armazenar',
     ],
 ];

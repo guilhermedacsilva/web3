@@ -15,7 +15,7 @@ class MensagemControlador extends Controlador
         ]);
     }
 
-    public function store()
+    public function armazenar()
     {
         $this->verificarLogado();
         $mensagem = new Mensagem(
