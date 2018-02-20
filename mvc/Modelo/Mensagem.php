@@ -6,8 +6,10 @@ use \Lib\DW3BancoDeDados;
 
 class Mensagem extends Modelo
 {
-    const BUSCAR_TODOS = 'SELECT m.texto, u.id, u.email FROM mensagens m JOIN usuarios u ON (m.usuario_id = u.id) ORDER BY m.id';
+    const BUSCAR_TODOS = 'SELECT m.texto, m.id m_id, u.id u_id, u.email FROM mensagens m JOIN usuarios u ON (m.usuario_id = u.id) ORDER BY m.id';
     const INSERIR = 'INSERT INTO mensagens(usuario_id,texto) VALUES (?, ?)';
+    const DELETAR = 'DELETE FROM mensagens WHERE id = ?';
+    private $id;
     private $usuarioId;
     private $texto;
     private $usuario;
@@ -15,11 +17,18 @@ class Mensagem extends Modelo
     public function __construct(
         $usuarioId,
         $texto,
-        $usuario = null
+        $usuario = null,
+        $id = null
     ) {
+        $this->id = $id;
         $this->usuarioId = $usuarioId;
         $this->texto = $texto;
         $this->usuario = $usuario;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getTexto()
@@ -54,15 +63,23 @@ class Mensagem extends Modelo
                 $registro['email'],
                 '',
                 null,
-                $registro['id']
+                $registro['u_id']
             );
             $objetos[] = new Mensagem(
-                $registro['id'],
+                $registro['u_id'],
                 $registro['texto'],
-                $usuario
+                $usuario,
+                $registro['m_id']
             );
         }
         return $objetos;
+    }
+
+    public static function destruir($id)
+    {
+        $comando = DW3BancoDeDados::prepare(self::DELETAR);
+        $comando->bindParam(1, $id, PDO::PARAM_INT);
+        $comando->execute();
     }
 
     protected function verificarErros()

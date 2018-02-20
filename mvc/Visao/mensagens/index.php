@@ -17,10 +17,15 @@
     
     <h2>Mensagens</h2>
     <?php foreach ($mensagens as $mensagem) : ?>
-        <p class="clearfix">
+        <form action="<?= URL_RAIZ . 'mensagens/' . $mensagem->getId() ?>" method="post" class="clearfix">
+            <input type="hidden" name="_metodo" value="DELETE">
             <img src="<?= URL_IMG . $mensagem->getUsuario()->getImagem() ?>" alt="Imagem do perfil" class="imagem-usuario pull-left">
             <strong><?= $mensagem->getUsuario()->getEmail() ?>:</strong>
             <?= $mensagem->getTexto() ?>
-        </p>
+            <br>
+            <button type="submit" class="btn btn-xs btn-danger" title="Deletar">
+                <span class="glyphicon glyphicon-trash"></span>
+            </button>
+        </form>
     <?php endforeach ?>
 </div>

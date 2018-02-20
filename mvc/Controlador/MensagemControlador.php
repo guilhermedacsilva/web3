@@ -34,4 +34,11 @@ class MensagemControlador extends Controlador
             ]);
         }
     }
+
+    public function destruir($id)
+    {
+        Mensagem::destruir($id);
+        header('Location: ' . URL_RAIZ . 'mensagens');
+        exit;
+    }
 }

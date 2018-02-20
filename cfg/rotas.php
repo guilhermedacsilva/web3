@@ -22,4 +22,7 @@ $rotas = [
         'GET' => '\Controlador\MensagemControlador#index',
         'POST' => '\Controlador\MensagemControlador#armazenar',
     ],
+    '/mensagens/?' => [
+        'DELETE' => '\Controlador\MensagemControlador#destruir',
+    ],
 ];
