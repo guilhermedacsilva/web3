@@ -34,12 +34,4 @@ class MensagemControlador extends Controlador
             ]);
         }
     }
-
-    private function verificarLogado()
-    {
-        if (DW3Sessao::get('usuario') === null) {
-            header('Location: ' . URL_RAIZ . 'login');
-            exit;
-        }
-    }
 }
