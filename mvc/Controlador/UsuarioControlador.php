@@ -16,7 +16,7 @@ class UsuarioControlador extends Controlador
         $usuario = new Usuario($_POST['email'], $_POST['senha'], $foto);
 
         if ($usuario->isValido()) {
-            $usuario->save();
+            $usuario->salvar();
             header('Location: ' . URL_RAIZ . 'usuarios/sucesso');
             exit;
 

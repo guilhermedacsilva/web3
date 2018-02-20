@@ -14,6 +14,7 @@
             <button type="submit" class="btn btn-danger">Sair</button>
         </form>
     </div>
+    
     <h2>Mensagens</h2>
     <?php foreach ($mensagens as $mensagem) : ?>
         <p class="clearfix">

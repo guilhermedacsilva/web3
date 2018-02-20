@@ -27,17 +27,12 @@ class Mensagem extends Modelo
         return $this->texto;
     }
 
-    public function getUsuarioId()
-    {
-        return $this->usuarioId;
-    }
-
     public function getUsuario()
     {
         return $this->usuario;
     }
 
-    public function save()
+    public function salvar()
     {
         $this->inserir();
     }
@@ -50,7 +45,7 @@ class Mensagem extends Modelo
         $comando->execute();
     }
 
-    public static function all()
+    public static function buscarTodos()
     {
         $registros = DW3BancoDeDados::query(self::BUSCAR_TODOS);
         $objetos = [];

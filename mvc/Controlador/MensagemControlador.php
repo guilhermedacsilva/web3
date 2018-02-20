@@ -9,7 +9,7 @@ class MensagemControlador extends Controlador
     public function index()
     {
         $this->verificarLogado();
-        $mensagens = Mensagem::all();
+        $mensagens = Mensagem::buscarTodos();
         $this->visao('mensagens/index.php', [
             'mensagens' => $mensagens
         ]);
@@ -23,14 +23,14 @@ class MensagemControlador extends Controlador
             $_POST['texto']
         );
         if ($mensagem->isValido()) {
-            $mensagem->save();
+            $mensagem->salvar();
             header('Location: ' . URL_RAIZ . 'mensagens');
             exit;
 
         } else {
             $this->setErros($mensagem->getValidacaoErros());
             $this->visao('mensagens/index.php', [
-                'mensagens' => Mensagem::all()
+                'mensagens' => Mensagem::buscarTodos()
             ]);
         }
     }

@@ -26,27 +26,12 @@ class Usuario extends Modelo
         $this->email = $email;
         $this->foto = $foto;
         $this->senhaPlana = $senha;
-        $this->setSenha($senha);
+        $this->senha = password_hash($senha, PASSWORD_BCRYPT);
     }
 
     public function getEmail()
     {
         return $this->email;
-    }
-
-    private function setSenha($senhaPlana)
-    {
-        $this->senha = password_hash($senhaPlana, PASSWORD_BCRYPT);
-    }
-
-    public function getSenha()
-    {
-        return $this->senha;
-    }
-
-    public function getId()
-    {
-        return $this->id;
     }
 
     public function getImagem()
@@ -77,7 +62,7 @@ class Usuario extends Modelo
         }
     }
 
-    public function save()
+    public function salvar()
     {
         $this->inserir();
         $this->salvarImagem();
@@ -102,7 +87,7 @@ class Usuario extends Modelo
         }
     }
 
-    public static function findEmail($email)
+    public static function buscarEmail($email)
     {
         $comando = DW3BancoDeDados::prepare(self::BUSCAR_POR_EMAIL);
         $comando->bindParam(1, $email, PDO::PARAM_STR, 255);

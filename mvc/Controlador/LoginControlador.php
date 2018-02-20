@@ -13,7 +13,7 @@ class LoginControlador extends Controlador
 
     public function store()
     {
-        $usuario = Usuario::findEmail($_POST['email']);
+        $usuario = Usuario::buscarEmail($_POST['email']);
         if ($usuario && $usuario->verificarSenha($_POST['senha'])) {
             DW3Sessao::set('usuario', $usuario->getId());
             header('Location: ' . URL_RAIZ . 'mensagens');
