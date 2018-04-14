@@ -1,5 +1,5 @@
 <?php
-namespace Lib;
+namespace Framework;
 
 abstract class DW3Modelo
 {

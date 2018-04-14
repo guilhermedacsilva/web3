@@ -2,7 +2,7 @@
 namespace Modelo;
 
 use \PDO;
-use \Lib\DW3BancoDeDados;
+use \Framework\DW3BancoDeDados;
 
 class Mensagem extends Modelo
 {

@@ -2,8 +2,8 @@
 namespace Modelo;
 
 use \PDO;
-use \Lib\DW3BancoDeDados;
-use \Lib\DW3ImagemUpload;
+use \Framework\DW3BancoDeDados;
+use \Framework\DW3ImagemUpload;
 
 class Usuario extends Modelo
 {

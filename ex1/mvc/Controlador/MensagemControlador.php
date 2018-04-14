@@ -1,7 +1,7 @@
 <?php
 namespace Controlador;
 
-use \Lib\DW3Sessao;
+use \Framework\DW3Sessao;
 use \Modelo\Mensagem;
 
 class MensagemControlador extends Controlador

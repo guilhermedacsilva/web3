@@ -1,5 +1,5 @@
 <?php
-namespace Lib;
+namespace Framework;
 
 class DW3Roteador
 {
@@ -45,7 +45,7 @@ class DW3Roteador
 
         // exemplo: /login
         $caminhoRota = $this->removerUrlRaiz($caminhoRequisicao);
-        
+
         // classe DW3Rota
         $this->resultado = $this->recuperarRota($caminhoRota);
     }

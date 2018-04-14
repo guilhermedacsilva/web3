@@ -1,8 +1,8 @@
 <?php
 namespace Controlador;
 
-use \Lib\DW3Controlador;
-use \Lib\DW3Sessao;
+use \Framework\DW3Controlador;
+use \Framework\DW3Sessao;
 
 abstract class Controlador extends DW3Controlador
 {

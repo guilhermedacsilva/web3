@@ -2,8 +2,8 @@
 
 const APLICACAO_NOME = 'Chat Online';
 
-// Se a URL_RAIZ mudar, altere também o arquivo .htaccess
-const URL_RAIZ = '/web3/';
+// Se a URL_RAIZ mudar, verifique arquivo .htaccess
+const URL_RAIZ = '/web3/ex1/';
 
 // Os caminhos sempre devem terminar com '/'
 
@@ -11,7 +11,7 @@ define('PASTA_RAIZ', dirname(__DIR__) . '/');
 
 const PASTA_CFG = PASTA_RAIZ . 'cfg/';
 
-const PASTA_LIB = PASTA_RAIZ . 'lib/';
+const PASTA_FRAMEWORK = PASTA_RAIZ . '../framework/';
 
 const PASTA_MVC = PASTA_RAIZ . 'mvc/';
 const PASTA_CONTROLADOR = PASTA_MVC . 'Controlador/';

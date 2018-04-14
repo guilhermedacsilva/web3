@@ -1,5 +1,5 @@
 <?php
-namespace Lib;
+namespace Framework;
 
 class DW3Aplicacao
 {
@@ -29,12 +29,12 @@ class DW3Aplicacao
     {
         $rota = $this->roteador->getResultado();
         $controladorNome = $rota->getControlador();
-        
+
         // um objeto pode ser instanciado com uma classe ou uma string
         $objetoControlador = new $controladorNome;
-        
+
         $metodoArray = [$objetoControlador, $rota->getMetodo()];
-        
+
         // executa um método passando parâmetros
         call_user_func_array($metodoArray, $rota->getParametros());
     }

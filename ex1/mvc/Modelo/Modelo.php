@@ -1,7 +1,7 @@
 <?php
 namespace Modelo;
 
-use \Lib\DW3Modelo;
+use \Framework\DW3Modelo;
 
 abstract class Modelo extends DW3Modelo
 {

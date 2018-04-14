@@ -1,5 +1,5 @@
 <?php
-namespace Lib;
+namespace Framework;
 
 trait DW3ControladorVisao
 {
