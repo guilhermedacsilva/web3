@@ -18,9 +18,11 @@ const PASTA_CONTROLADOR = PASTA_MVC . 'Controlador/';
 const PASTA_MODELO = PASTA_MVC . 'Modelo/';
 const PASTA_VISAO = PASTA_MVC . 'Visao/';
 
+const PASTA_SQLS = PASTA_RAIZ . 'sqls/';
+
 const PASTA_PUBLICO = PASTA_RAIZ . 'publico/';
 
-const PASTA_TESTES = PASTA_RAIZ . 'testes/';
+const PASTA_TESTE = PASTA_RAIZ . 'teste/';
 
 const URL_PUBLIC = URL_RAIZ . 'publico/';
 const URL_CSS = URL_PUBLIC . 'css/';

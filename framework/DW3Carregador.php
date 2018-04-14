@@ -14,7 +14,7 @@ function carregarArquivoDaClasse($nomeDaClasse)
 
 	} elseif (iniciaCom($nomeDaClasse, 'Teste\\')) {
 		$nomeDaClasse = substr($nomeDaClasse, 6);
-		require_once PASTA_TESTES . $nomeDaClasse . '.php';
+		require_once PASTA_TESTE . $nomeDaClasse . '.php';
 
 	} else {
 		require_once PASTA_MVC . str_replace('\\', '/', $nomeDaClasse) . '.php';

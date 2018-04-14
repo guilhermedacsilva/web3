@@ -10,6 +10,7 @@ class DW3BancoDeDados
     */
     const DNS_FORMATO = '%s:host=%s;port=%s;dbname=%s';
     private static $pdo;
+    private static $banco;
 
     public static function query($sql)
     {
@@ -24,6 +25,14 @@ class DW3BancoDeDados
     public static function prepare($sql)
     {
         return self::getPdo()->prepare($sql);
+    }
+
+    public static function getBanco()
+    {
+        if (self::$banco == null) {
+            self::getPdo();
+        }
+        return self::$banco;
     }
 
     public static function getPdo()
@@ -43,6 +52,7 @@ class DW3BancoDeDados
             $banco['senha'],
             [PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8']
         );
+        self::$banco = $banco['banco'];
     }
 
     private static function getDnsString($banco)
@@ -54,5 +64,11 @@ class DW3BancoDeDados
             $banco['porta'],
             $banco['banco']
         );
+    }
+
+    public static function reconectar()
+    {
+        self::$pdo = null;
+        self::criarPdo();
     }
 }
