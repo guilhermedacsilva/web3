@@ -5,16 +5,16 @@ use \Teste\Teste;
 use \Modelo\Usuario;
 use \Framework\DW3BancoDeDados;
 
-class TesteUsuario extends Teste
+class TesteMensagem extends Teste
 {
-	public function testeInserir()
-	{
+    public function testeInserir()
+    {
         $usuario = new Usuario('email-teste', 'senha', null);
         $usuario->salvar();
         $query = DW3BancoDeDados::getPdo()->query("SELECT * FROM usuarios WHERE email = 'email-teste'");
         $bdUsuairo = $query->fetch();
         $this->verificar($bdUsuairo !== false);
-	}
+    }
 
     public function testeBuscarEmail()
     {

@@ -15,16 +15,27 @@ class DW3Testador
             $classeNomeCompleto = "\\Teste\\Unitario\\$classeNome";
             $objetoTeste = new $classeNomeCompleto();
             $metodos = $this->procurarMetodosTeste($objetoTeste);
+            $erros = false;
+            echo "$classeNome";
             foreach ($metodos as $metodo) {
                 $objetoTeste->recriarBancoDeDados();
                 $objetoTeste->antes();
-                $objetoTeste->$metodo();
+                try {
+                    $objetoTeste->$metodo();
+                } catch (\Exception $e) {
+                    echo "\n    Erro linha: " . $e->getTrace()[0]['line'];
+                    $erros = true;
+                }
                 $objetoTeste->depois();
             }
+            if (!$erros) {
+                echo ': OK';
+            }
+            echo "\n";
         }
     }
 
-    /* Retorna os nomes das classes */
+    /* Retorna os nomes das classes que comecem com 'Teste' */
     private function procurarClassesTeste($pasta)
     {
         $arquivos = scandir($pasta);
@@ -36,6 +47,7 @@ class DW3Testador
         }, $arquivos);
     }
 
+    /* Retorna o nome dos métodos que comecem com 'teste' */
     private function procurarMetodosTeste($classe)
     {
         $metodos = get_class_methods($classe);

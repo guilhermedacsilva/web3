@@ -28,7 +28,7 @@ abstract class DW3Teste
     protected function verificar($condicao)
     {
         if (!$condicao) {
-            echo "Teste falhou\n";
+            throw new \Exception();
         }
     }
 }
