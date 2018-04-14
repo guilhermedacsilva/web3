@@ -19,17 +19,6 @@ abstract class DW3Controlador
 		}
 	}
 
-	public static function modoTeste()
-	{
-		self::$deveRedirecionar = false;
-		self::$redirecionarUrl = null;
-	}
-
-	public static function getRedirecionarUrl()
-	{
-		return self::$redirecionarUrl;
-	}
-
 	protected function visao($__conteudo, $__dados = [])
 	{
 		extract($__dados);
@@ -57,5 +46,16 @@ abstract class DW3Controlador
 		extract($this->visaoDados);
 		extract($__dados);
 		require PASTA_VISAO . $__nomeArquivo;
+	}
+
+	public static function modoTeste()
+	{
+		self::$deveRedirecionar = false;
+		self::$redirecionarUrl = null;
+	}
+
+	public static function getRedirecionarUrl()
+	{
+		return self::$redirecionarUrl;
 	}
 }

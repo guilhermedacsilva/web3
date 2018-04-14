@@ -5,8 +5,9 @@ abstract class DW3Modelo
 {
 	protected $__erros = [];
 
-    /* Deve user $this->setErroMensagem() */
-    abstract protected function verificarErros();
+    /* Use $this->setErroMensagem() quando encontrar um erro */
+    protected function verificarErros() {
+    }
 
 	public function isValido()
     {
