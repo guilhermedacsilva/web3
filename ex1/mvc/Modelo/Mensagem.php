@@ -48,10 +48,13 @@ class Mensagem extends Modelo
 
     private function inserir()
     {
+        DW3BancoDeDados::getPdo()->beginTransaction();
         $comando = DW3BancoDeDados::prepare(self::INSERIR);
         $comando->bindParam(1, $this->usuarioId, PDO::PARAM_INT);
         $comando->bindParam(2, $this->texto, PDO::PARAM_STR, 255);
         $comando->execute();
+        $this->id = DW3BancoDeDados::getPdo()->lastInsertId();
+        DW3BancoDeDados::getPdo()->commit();
     }
 
     public static function buscarTodos()
