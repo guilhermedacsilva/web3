@@ -1,7 +1,7 @@
 <?php
 
 const APLICACAO_NOME = 'Chat Online';
-const URL_RAIZ = '/app/';
+const URL_RAIZ = '/web3/';
 
 // Os caminhos sempre devem terminar com '/'
 
