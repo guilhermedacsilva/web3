@@ -5,19 +5,21 @@ class DW3Testador
 {
     public function testarTudo()
     {
-        $this->rodarTestesUnitarios();
+        $this->rodarTestes('Unitario');
+        $this->rodarTestes('Funcional');
     }
 
-    private function rodarTestesUnitarios()
+    private function rodarTestes($tipo)
     {
-        $classes = $this->procurarClassesTeste(PASTA_TESTE . 'Unitario');
+        $classes = $this->procurarClassesTeste(PASTA_TESTE . $tipo);
         foreach ($classes as $classeNome) {
-            $classeNomeCompleto = "\\Teste\\Unitario\\$classeNome";
+            $classeNomeCompleto = "\\Teste\\$tipo\\$classeNome";
             $objetoTeste = new $classeNomeCompleto();
             $metodos = $this->procurarMetodosTeste($objetoTeste);
             $erros = false;
             echo "$classeNome";
             foreach ($metodos as $metodo) {
+                DW3Sessao::modoTeste();
                 $objetoTeste->recriarBancoDeDados();
                 $objetoTeste->antes();
                 try {

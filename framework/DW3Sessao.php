@@ -3,6 +3,14 @@ namespace Framework;
 
 class DW3Sessao
 {
+    private static $iniciarSessao = true;
+
+    public static function modoTeste()
+    {
+        self::$iniciarSessao = false;
+        $_SESSION = [];
+    }
+
     public static function get($chave, $valorPadrao = null)
     {
         self::iniciar();
@@ -28,7 +36,7 @@ class DW3Sessao
 
     private static function iniciar()
     {
-        if (session_status() == PHP_SESSION_NONE) {
+        if (self::$iniciarSessao && session_status() == PHP_SESSION_NONE) {
             session_start();
         }
     }

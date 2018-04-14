@@ -24,8 +24,7 @@ class MensagemControlador extends Controlador
         );
         if ($mensagem->isValido()) {
             $mensagem->salvar();
-            header('Location: ' . URL_RAIZ . 'mensagens');
-            exit;
+            $this->redirecionar(URL_RAIZ . 'mensagens');
 
         } else {
             $this->setErros($mensagem->getValidacaoErros());
@@ -38,7 +37,6 @@ class MensagemControlador extends Controlador
     public function destruir($id)
     {
         Mensagem::destruir($id);
-        header('Location: ' . URL_RAIZ . 'mensagens');
-        exit;
+        $this->redirecionar(URL_RAIZ . 'mensagens');
     }
 }

@@ -5,9 +5,30 @@ abstract class DW3Controlador
 {
 	use DW3ControladorVisao;
 
+	private static $deveRedirecionar = true;
+	private static $redirecionarUrl;
 	protected $visaoTemplate = 'index.php';
 	protected $visaoConteudo;
 	protected $visaoDados;
+
+	protected function redirecionar($url)
+	{
+		self::$redirecionarUrl = $url;
+		if (self::$deveRedirecionar) {
+			header("Location: $url");
+		}
+	}
+
+	public static function modoTeste()
+	{
+		self::$deveRedirecionar = false;
+		self::$redirecionarUrl = null;
+	}
+
+	public static function getRedirecionarUrl()
+	{
+		return self::$redirecionarUrl;
+	}
 
 	protected function visao($__conteudo, $__dados = [])
 	{
@@ -21,7 +42,6 @@ abstract class DW3Controlador
 			$this->visaoDados = $__dados;
 			require PASTA_VISAO . 'templates/' . $this->visaoTemplate;
 		}
-		exit;
 	}
 
 	protected function imprimirConteudo()

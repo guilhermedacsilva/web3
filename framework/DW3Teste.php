@@ -25,7 +25,47 @@ abstract class DW3Teste
         }
     }
 
+    protected function get($url)
+    {
+        ob_start();
+        DW3Controlador::modoTeste();
+        $_SERVER['REQUEST_URI'] = URL_RAIZ . ltrim($url, '/');
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $app = new DW3Aplicacao();
+        $app->executar();
+        $resposta = [
+            'html' => ob_get_contents(),
+            'redirecionar' => DW3Controlador::getRedirecionarUrl()
+        ];
+        ob_end_clean();
+        return $resposta;
+    }
+
+    protected function post($url, $dados = [])
+    {
+        ob_start();
+        DW3Controlador::modoTeste();
+        $_SERVER['REQUEST_URI'] = URL_RAIZ . ltrim($url, '/');
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        $_POST = $dados;
+        $app = new DW3Aplicacao();
+        $app->executar();
+        $resposta = [
+            'html' => ob_get_contents(),
+            'redirecionar' => DW3Controlador::getRedirecionarUrl()
+        ];
+        ob_end_clean();
+        return $resposta;
+    }
+
     protected function verificar($condicao)
+    {
+        if (!$condicao) {
+            throw new \Exception();
+        }
+    }
+
+    protected function verificarHtml($resposta, $html)
     {
         if (!$condicao) {
             throw new \Exception();

@@ -12,8 +12,10 @@ class DW3Aplicacao
 
     public function executar()
     {
-        $this->interpretarRota();
-        $this->executarControlador();
+        $encontrou = $this->interpretarRota();
+        if ($encontrou) {
+            $this->executarControlador();
+        }
     }
 
     private function interpretarRota()
@@ -21,8 +23,9 @@ class DW3Aplicacao
         $this->roteador->interpretarRota();
         if (!$this->roteador->getResultado()) {
             echo 'Rota não encontrada.';
-            exit;
+            return false;
         }
+        return true;
     }
 
     private function executarControlador()

@@ -17,8 +17,7 @@ class UsuarioControlador extends Controlador
 
         if ($usuario->isValido()) {
             $usuario->salvar();
-            header('Location: ' . URL_RAIZ . 'usuarios/sucesso');
-            exit;
+            $this->redirecionar(URL_RAIZ . 'usuarios/sucesso');
 
         } else {
             $this->setErros($usuario->getValidacaoErros());
