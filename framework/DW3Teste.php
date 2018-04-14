@@ -25,6 +25,13 @@ abstract class DW3Teste
         }
     }
 
+    protected function verificar($condicao)
+    {
+        if (!$condicao) {
+            throw new \Exception();
+        }
+    }
+
     protected function get($url)
     {
         return $this->requisicao('GET', $url);
@@ -62,19 +69,5 @@ abstract class DW3Teste
         ];
         ob_end_clean();
         return $resposta;
-    }
-
-    protected function verificar($condicao)
-    {
-        if (!$condicao) {
-            throw new \Exception();
-        }
-    }
-
-    protected function verificarHtml($resposta, $html)
-    {
-        if (!$condicao) {
-            throw new \Exception();
-        }
     }
 }
