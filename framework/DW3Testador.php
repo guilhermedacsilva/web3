@@ -28,7 +28,7 @@ class DW3Testador
             $this->rodarMetodos($objetoTeste, $metodo);
         }
         if (!$erros) {
-            echo ': OK';
+            echo ': ' . count($metodos) . ' OK';
         }
         echo "\n";
     }
