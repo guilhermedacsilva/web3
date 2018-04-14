@@ -27,27 +27,33 @@ abstract class DW3Teste
 
     protected function get($url)
     {
-        ob_start();
-        DW3Controlador::modoTeste();
-        $_SERVER['REQUEST_URI'] = URL_RAIZ . ltrim($url, '/');
-        $_SERVER['REQUEST_METHOD'] = 'GET';
-        $app = new DW3Aplicacao();
-        $app->executar();
-        $resposta = [
-            'html' => ob_get_contents(),
-            'redirecionar' => DW3Controlador::getRedirecionarUrl()
-        ];
-        ob_end_clean();
-        return $resposta;
+        return $this->requisicao('GET', $url);
     }
 
     protected function post($url, $dados = [])
     {
+        return $this->requisicao('POST', $url, $dados);
+    }
+
+    protected function delete($url, $dados = [])
+    {
+        return $this->requisicao('DELETE', $url, $dados);
+    }
+
+    protected function patch($url, $dados = [])
+    {
+        return $this->requisicao('PATCH', $url, $dados);
+    }
+
+    private function requisicao($metodo, $url, $dados = [])
+    {
         ob_start();
         DW3Controlador::modoTeste();
-        $_SERVER['REQUEST_URI'] = URL_RAIZ . ltrim($url, '/');
-        $_SERVER['REQUEST_METHOD'] = 'POST';
-        $_POST = $dados;
+        $_SERVER['REQUEST_URI'] = $url;
+        $_SERVER['REQUEST_METHOD'] = $metodo;
+        if ($metodo != 'GET') {
+            $_POST = $dados;
+        }
         $app = new DW3Aplicacao();
         $app->executar();
         $resposta = [
