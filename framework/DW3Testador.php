@@ -13,28 +13,38 @@ class DW3Testador
     {
         $classes = $this->procurarClassesTeste(PASTA_TESTE . $tipo);
         foreach ($classes as $classeNome) {
-            $classeNomeCompleto = "\\Teste\\$tipo\\$classeNome";
-            $objetoTeste = new $classeNomeCompleto();
-            $metodos = $this->procurarMetodosTeste($objetoTeste);
-            $erros = false;
-            echo "$classeNome";
-            foreach ($metodos as $metodo) {
-                DW3Sessao::modoTeste();
-                $objetoTeste->recriarBancoDeDados();
-                $objetoTeste->antes();
-                try {
-                    $objetoTeste->$metodo();
-                } catch (\Exception $e) {
-                    echo "\n    Erro linha: " . $e->getTrace()[0]['line'];
-                    $erros = true;
-                }
-                $objetoTeste->depois();
-            }
-            if (!$erros) {
-                echo ': OK';
-            }
-            echo "\n";
+            $this->rodarClasse($classeNome, $tipo);
         }
+    }
+
+    private function rodarClasse($classeNome, $tipo)
+    {
+        $classeNomeCompleto = "\\Teste\\$tipo\\$classeNome";
+        $objetoTeste = new $classeNomeCompleto();
+        $metodos = $this->procurarMetodosTeste($objetoTeste);
+        $erros = false;
+        echo "$classeNome";
+        foreach ($metodos as $metodo) {
+            $this->rodarMetodos($objetoTeste, $metodo);
+        }
+        if (!$erros) {
+            echo ': OK';
+        }
+        echo "\n";
+    }
+
+    private function rodarMetodos($objetoTeste, $metodo)
+    {
+        DW3Sessao::modoTeste();
+        $objetoTeste->recriarBancoDeDados();
+        $objetoTeste->antes();
+        try {
+            $objetoTeste->$metodo();
+        } catch (\Exception $e) {
+            echo "\n    Erro linha: " . $e->getTrace()[0]['line'];
+            $erros = true;
+        }
+        $objetoTeste->depois();
     }
 
     /* Retorna os nomes das classes que comecem com 'Teste' */
