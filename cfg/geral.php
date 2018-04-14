@@ -1,6 +1,8 @@
 <?php
 
 const APLICACAO_NOME = 'Chat Online';
+
+// Se a URL_RAIZ mudar, altere também o arquivo .htaccess
 const URL_RAIZ = '/web3/';
 
 // Os caminhos sempre devem terminar com '/'
