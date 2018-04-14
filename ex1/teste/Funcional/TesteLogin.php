@@ -26,6 +26,8 @@ class TesteLogin extends Teste
             'email' => 'joao',
             'senha' => '1234'
         ]);
-
+        $this->verificar($resposta['redirecionar'] == '/web3/ex1/mensagens');
+        $resposta = $this->get('/mensagens');
+        $this->verificar(strpos($resposta['html'], '<h2>Escreva a mensagem</h2>') !== false);
     }
 }
