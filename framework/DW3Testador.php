@@ -52,7 +52,7 @@ class DW3Testador
     {
         $arquivos = scandir($pasta);
         $arquivos = array_filter($arquivos, function($arquivo) {
-            return substr($arquivo, 0, 5) === 'Teste';
+            return iniciaCom($arquivo, 'Teste');
         });
         return array_map(function($arquivo) {
             return substr($arquivo, 0, -4);
@@ -64,7 +64,7 @@ class DW3Testador
     {
         $metodos = get_class_methods($classe);
         return array_filter($metodos, function($metodo) {
-            return substr($metodo, 0, 5) === 'teste';
+            return iniciaCom($metodo, 'teste');
         });
     }
 }
