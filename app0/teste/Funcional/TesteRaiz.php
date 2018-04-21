@@ -2,7 +2,6 @@
 namespace Teste\Funcional;
 
 use \Teste\Teste;
-use \Modelo\Mensagem;
 
 class TesteRaiz extends Teste
 {
