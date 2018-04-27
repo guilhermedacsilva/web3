@@ -3,6 +3,7 @@ namespace Teste\Funcional;
 
 use \Teste\Teste;
 use \Modelo\Mensagem;
+use \Framework\DW3BancoDeDados;
 
 class TesteRaiz extends Teste
 {
@@ -28,5 +29,10 @@ class TesteRaiz extends Teste
         $this->verificar($resposta['redirecionar'] == URL_RAIZ);
         $resposta = $this->get(URL_RAIZ);
         $this->verificar(strpos($resposta['html'], 'Blz?') !== false);
+        /*
+        $resultado = DW3BancoDeDados::query('SELECT * FROM mensagens');
+        $mensagem = $resultado->fetch();
+        $this->verificar($mensagem['texto'] === 'Blz?');
+        */
     }
 }

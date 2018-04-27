@@ -11,7 +11,7 @@ class TesteMensagem extends Teste
     {
         $mensagem = new Mensagem('Pedro', 'Ola pessoal');
         $mensagem->salvar();
-        $query = DW3BancoDeDados::getPdo()->query('SELECT * FROM mensagens');
+        $query = DW3BancoDeDados::query('SELECT * FROM mensagens');
         $bdMensagem = $query->fetch();
         $this->verificar($bdMensagem['texto'] === $mensagem->getTexto());
     }
