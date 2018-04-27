@@ -22,12 +22,12 @@ class DW3Testador
         $classeNomeCompleto = "\\Teste\\$tipo\\$classeNome";
         $objetoTeste = new $classeNomeCompleto();
         $metodos = $this->procurarMetodosTeste($objetoTeste);
-        $erros = false;
+        $erros = 0;
         echo "$classeNome";
         foreach ($metodos as $metodo) {
-            $this->rodarMetodos($objetoTeste, $metodo);
+            $erros += $this->rodarMetodos($objetoTeste, $metodo);
         }
-        if (!$erros) {
+        if ($erros == 0) {
             echo ': ' . count($metodos) . ' OK';
         }
         echo "\n";
@@ -38,13 +38,15 @@ class DW3Testador
         DW3Sessao::modoTeste();
         $objetoTeste->recriarBancoDeDados();
         $objetoTeste->antes();
+        $erros = 0;
         try {
             $objetoTeste->$metodo();
         } catch (\Exception $e) {
             echo "\n    Erro linha: " . $e->getTrace()[0]['line'];
-            $erros = true;
+            $erros = 1;
         }
         $objetoTeste->depois();
+        return $erros;
     }
 
     /* Retorna os nomes das classes que comecem com 'Teste' */
