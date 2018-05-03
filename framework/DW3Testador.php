@@ -12,6 +12,7 @@ class DW3Testador
     private function rodarTestes($tipo)
     {
         $classes = $this->procurarClassesTeste(PASTA_TESTE . $tipo);
+        echo "-- $tipo -------------------------\n";
         foreach ($classes as $classeNome) {
             $this->rodarClasse($classeNome, $tipo);
         }
