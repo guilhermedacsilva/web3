@@ -19,8 +19,10 @@ abstract class DW3Teste
             $comandos = file_get_contents(PASTA_SQLS . $arquivo);
             $comandos = explode(";", $comandos);
             foreach ($comandos as $comando) {
-                DW3BancoDeDados::exec($comando);
-                DW3BancoDeDados::reconectar();
+                if (trim($comando) != '') {
+                    DW3BancoDeDados::exec($comando);
+                    DW3BancoDeDados::reconectar();
+                }
             }
         }
     }
