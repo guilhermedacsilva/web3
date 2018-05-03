@@ -7,6 +7,7 @@ use \Framework\DW3BancoDeDados;
 class Contato extends Modelo
 {
     const BUSCAR_TODOS = 'SELECT * FROM contatos ORDER BY nome';
+    const BUSCAR_ID = 'SELECT * FROM contatos WHERE id = ?';
     const INSERIR = 'INSERT INTO contatos(nome, endereco, telefone1, telefone2, telefone3) VALUES (?, ?, ?, ?, ?)';
     const ATUALIZAR = 'UPDATE contatos SET nome = ?, endereco = ?, telefone1 = ?, telefone2 = ?, telefone3 = ? WHERE id = ?';
     const DELETAR = 'DELETE FROM contatos WHERE id = ?';
@@ -18,11 +19,11 @@ class Contato extends Modelo
     private $telefone3;
 
     public function __construct(
-        $nome,
-        $endereco,
-        $telefone1,
-        $telefone2,
-        $telefone3,
+        $nome = null,
+        $endereco = null,
+        $telefone1 = null,
+        $telefone2 = null,
+        $telefone3 = null,
         $id = null
     ) {
         $this->id = $id;
@@ -138,6 +139,22 @@ class Contato extends Modelo
             );
         }
         return $objetos;
+    }
+
+    public static function buscarId($id)
+    {
+        $comando = DW3BancoDeDados::prepare(self::BUSCAR_ID);
+        $comando->bindParam(1, $id, PDO::PARAM_INT);
+        $comando->execute();
+        $registro = $comando->fetch();
+        return new Contato(
+            $registro['nome'],
+            $registro['endereco'],
+            $registro['telefone1'],
+            $registro['telefone2'],
+            $registro['telefone3'],
+            $registro['id']
+        );
     }
 
     public static function destruir($id)

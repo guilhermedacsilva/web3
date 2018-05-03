@@ -1,6 +1,9 @@
 <?php
 
 $rotas = [
+    '/' => [
+        'GET' => '\Controlador\RaizControlador#index',
+    ],
     // REST
     '/contatos' => [
         'GET' => '\Controlador\ContatoControlador#index',
