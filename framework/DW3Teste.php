@@ -34,6 +34,27 @@ abstract class DW3Teste
         }
     }
 
+    protected function verificarContem($resposta, $texto)
+    {
+        if (strpos($resposta['html'], $texto) === false) {
+            throw new \Exception();
+        }
+    }
+
+    protected function verificarNaoContem($resposta, $texto)
+    {
+        if (strpos($resposta['html'], $texto) !== false) {
+            throw new \Exception();
+        }
+    }
+
+    protected function verificarRedirecionar($resposta, $url)
+    {
+        if ($resposta['redirecionar'] !== $url) {
+            throw new \Exception();
+        }
+    }
+
     protected function get($url)
     {
         return $this->requisicao('GET', $url);

@@ -1,5 +1,5 @@
 <div class="center-block site">
-    <h1 class="text-center">Cadastro de Contato</h1>
+    <h1 class="text-center">Edição de Contato</h1>
     <nav>
         <a href="<?= URL_RAIZ . 'contatos' ?>" class="btn btn-default">Voltar para a listagem</a>
     </nav>

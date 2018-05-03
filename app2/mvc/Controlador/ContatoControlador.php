@@ -35,7 +35,7 @@ class ContatoControlador extends Controlador
             $_POST['telefone3']
         );
         $contato->salvar();
-        $this->redirecionar(URL_RAIZ);
+        $this->redirecionar(URL_RAIZ . 'contatos');
     }
 
     public function editar($id)
@@ -55,12 +55,12 @@ class ContatoControlador extends Controlador
         $contato->setTelefone2($_POST['telefone2']);
         $contato->setTelefone3($_POST['telefone3']);
         $contato->salvar();
-        $this->redirecionar(URL_RAIZ);
+        $this->redirecionar(URL_RAIZ . 'contatos');
     }
 
     public function destruir($id)
     {
         Contato::destruir($id);
-        $this->redirecionar(URL_RAIZ);
+        $this->redirecionar(URL_RAIZ . 'contatos');
     }
 }
