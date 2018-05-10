@@ -23,7 +23,7 @@
         </div>
         <div class="form-group">
             <label class="control-label" for="descricao">Descrição</label>
-            <input id="descricao" name="descricao" class="form-control">
+            <textarea id="descricao" name="descricao" class="form-control" rows="3"></textarea>
         </div>
         <button type="submit" class="btn btn-primary center-block">Cadastrar a reclamação</button>
     </form>
