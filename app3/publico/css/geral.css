@@ -1,0 +1,19 @@
+.site {
+    width: 800px;
+}
+
+.margin-bottom {
+    margin-bottom: 1em;
+}
+
+.campo-form {
+    width: 250px!important;
+}
+
+nav {
+	margin-bottom: 20px;
+}
+
+.inline {
+	display: inline;
+}
