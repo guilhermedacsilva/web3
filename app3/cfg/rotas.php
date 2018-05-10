@@ -4,23 +4,28 @@ $rotas = [
     '/' => [
         'GET' => '\Controlador\RaizControlador#index',
     ],
-    // REST
-    '/contatos' => [
-        'GET' => '\Controlador\ContatoControlador#index',
-        'POST' => '\Controlador\ContatoControlador#armazenar',
+    '/login' => [
+        'GET' => '\Controlador\LoginControlador#criar',
+        'POST' => '\Controlador\LoginControlador#armazenar',
+        'DELETE' => '\Controlador\LoginControlador#destruir',
     ],
-    // REST
-    '/contatos/?' => [
-        'GET' => '\Controlador\ContatoControlador#mostrar',
-        'PATCH' => '\Controlador\ContatoControlador#atualizar',
-        'DELETE' => '\Controlador\ContatoControlador#destruir',
+    '/usuarios' => [
+        'POST' => '\Controlador\UsuarioControlador#armazenar',
     ],
-    // NÃO INCLUSO NO REST
-    '/contatos/criar' => [
-        'GET' => '\Controlador\ContatoControlador#criar',
+    '/usuarios/sucesso' => [
+        'GET' => '\Controlador\UsuarioControlador#sucesso',
     ],
-    // NÃO INCLUSO NO REST
-    '/contatos/?/editar' => [
-        'GET' => '\Controlador\ContatoControlador#editar',
+    '/usuarios/criar' => [
+        'GET' => '\Controlador\UsuarioControlador#criar',
+    ],
+    '/reclamacoes' => [
+        'GET' => '\Controlador\ReclamacaoControlador#index',
+        'POST' => '\Controlador\ReclamacaoControlador#armazenar',
+    ],
+    '/reclamacoes/?' => [
+        'PATCH' => '\Controlador\ReclamacaoControlador#atualizar',
+    ],
+    '/reclamacoes/criar' => [
+        'GET' => '\Controlador\ReclamacaoControlador#criar',
     ],
 ];

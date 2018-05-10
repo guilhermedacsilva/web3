@@ -14,6 +14,7 @@ CREATE TABLE reclamacoes (
     data_incidente TIMESTAMP NOT NULL,
     local VARCHAR(255) NOT NULL,
     descricao TEXT NOT NULL,
+    data_atendimento TIMESTAMP NULL DEFAULT NULL,
     usuario_id INT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
