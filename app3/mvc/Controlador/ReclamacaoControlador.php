@@ -12,7 +12,7 @@ class ReclamacaoControlador extends Controlador
         $reclamacoes = Reclamacao::buscarNaoAtendidos();
         $this->visao('reclamacoes/index.php', [
             'reclamacoes' => $reclamacoes
-        ]);
+        ], 'admin.php');
     }
 
     public function criar()
