@@ -40,6 +40,8 @@ class DW3Aplicacao
         $metodoArray = [$objetoControlador, $rota->getMetodo()];
 
         // executa um método passando parâmetros
-        call_user_func_array($metodoArray, $rota->getParametros());
+        try {
+            call_user_func_array($metodoArray, $rota->getParametros());
+        } catch (DW3RedirecionarException $e) {}
     }
 }

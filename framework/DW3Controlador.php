@@ -15,8 +15,8 @@ abstract class DW3Controlador
 		self::$redirecionarUrl = $url;
 		if (self::$deveRedirecionar) {
 			header("Location: $url");
-			exit;
 		}
+		throw new DW3RedirecionarException();
 	}
 
 	protected function visao(
