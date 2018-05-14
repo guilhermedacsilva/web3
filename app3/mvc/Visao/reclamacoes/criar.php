@@ -8,6 +8,14 @@
             </a>
         </form>
     </nav>
+
+    <?php if ($mensagem) : ?>
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <?= $mensagem ?>
+        </div>
+    <?php endif ?>
+    
     <form action="<?= URL_RAIZ . 'reclamacoes' ?>" method="post">
         <div class="form-group">
             <label class="control-label" for="usuario">Usuário</label>

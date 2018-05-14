@@ -9,7 +9,6 @@ class Usuario extends Modelo
     const BUSCAR_ID = 'SELECT * FROM usuarios WHERE id = ?';
     const BUSCAR_NOME = 'SELECT * FROM usuarios WHERE nome = ?';
     const INSERIR = 'INSERT INTO usuarios(nome, senha) VALUES (?, ?)';
-    const ATUALIZAR = 'UPDATE usuarios SET nome = ?, senha = ? WHERE id = ?';
     private $id;
     private $nome;
     private $senha;
@@ -62,11 +61,7 @@ class Usuario extends Modelo
 
     public function salvar()
     {
-        if ($this->id == null) {
-            $this->inserir();
-        } else {
-            $this->atualizar();
-        }
+        $this->inserir();
     }
 
     public function inserir()
@@ -78,15 +73,6 @@ class Usuario extends Modelo
         $comando->execute();
         $this->id = DW3BancoDeDados::getPdo()->lastInsertId();
         DW3BancoDeDados::getPdo()->commit();
-    }
-
-    public function atualizar()
-    {
-        $comando = DW3BancoDeDados::prepare(self::ATUALIZAR);
-        $comando->bindParam(1, $this->nome, PDO::PARAM_STR, 255);
-        $comando->bindParam(2, $this->senha, PDO::PARAM_STR, 255);
-        $comando->bindParam(3, $this->id, PDO::PARAM_INT);
-        $comando->execute();
     }
 
     public static function buscarId($id)

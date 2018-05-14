@@ -6,6 +6,7 @@ use \Modelo\Contato;
 
 class TesteContatos extends Teste
 {
+    /*
     public function testeIndexSemDados()
     {
         $resposta = $this->get(URL_RAIZ . 'contatos');
@@ -102,4 +103,5 @@ class TesteContatos extends Teste
         $resposta = $this->get(URL_RAIZ . 'contatos');
         $this->verificarNaoContem($resposta, 'Joao');
     }
+    */
 }

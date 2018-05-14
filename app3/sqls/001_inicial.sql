@@ -1,9 +1,9 @@
-CREATE DATABASE app3 COLLATE 'utf8mb4_unicode_ci';
+CREATE DATABASE app3 COLLATE 'utf8_unicode_ci';
 
 CREATE TABLE usuarios (
     id INT NOT NULL AUTO_INCREMENT,
-    nome VARCHAR(255) NOT NULL,
-    senha VARCHAR(255) NOT NULL,
+    nome VARCHAR(255) UNIQUE NOT NULL,
+    senha CHAR(60) NOT NULL,
     admin BOOLEAN NOT NULL DEFAULT 0,
     PRIMARY KEY (id)
 )

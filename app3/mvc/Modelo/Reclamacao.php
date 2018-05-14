@@ -7,7 +7,6 @@ use \Framework\DW3BancoDeDados;
 class Reclamacao extends Modelo
 {
     const BUSCAR_ID = 'SELECT * FROM reclamacoes WHERE id = ?';
-    const BUSCAR_ATENDIDOS = 'SELECT * FROM reclamacoes WHERE data_atendimento IS NOT NULL ORDER BY id';
     const BUSCAR_NAO_ATENDIDOS = 'SELECT * FROM reclamacoes WHERE data_atendimento IS NULL ORDER BY id';
     const INSERIR = 'INSERT INTO reclamacoes(data_incidente, local, descricao, usuario_id) VALUES (?, ?, ?, ?)';
     const ATUALIZAR = 'UPDATE reclamacoes SET data_atendimento = ? WHERE id = ?';
@@ -120,23 +119,6 @@ class Reclamacao extends Modelo
             $registro['id'],
             $registro['data_atendimento']
         );
-    }
-
-    public static function buscarAtendidos()
-    {
-        $registros = DW3BancoDeDados::query(self::BUSCAR_ATENDIDOS);
-        $reclamacoes = [];
-        foreach ($registros as $registro) {
-            $reclamacoes[] = new Reclamacao(
-                $registro['data_incidente'],
-                $registro['local'],
-                $registro['descricao'],
-                $registro['usuario_id'],
-                $registro['id'],
-                $registro['data_atendimento']
-            );
-        }
-        return $reclamacoes;
     }
 
     public static function buscarNaoAtendidos()

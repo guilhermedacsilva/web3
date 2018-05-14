@@ -3,6 +3,8 @@ namespace Framework;
 
 class DW3Sessao
 {
+    const CHAVE_FLASH_USAR = '__flashUsar';
+    const CHAVE_FLASH_GUARDAR = '__flashGuardar';
     private static $iniciarSessao = true;
 
     public static function modoTeste()
@@ -34,10 +36,33 @@ class DW3Sessao
         }
     }
 
+    public static function setFlash($chave, $valor)
+    {
+        self::iniciar();
+        $_SESSION[self::CHAVE_FLASH_GUARDAR][$chave] = $valor;
+    }
+
+    public static function getFlash($chave, $valorPadrao = null)
+    {
+        self::iniciar();
+        if (array_key_exists($chave, $_SESSION[self::CHAVE_FLASH_USAR])) {
+            return $_SESSION[self::CHAVE_FLASH_USAR][$chave];
+        }
+        return $valorPadrao;
+    }
+
     private static function iniciar()
     {
         if (self::$iniciarSessao && session_status() == PHP_SESSION_NONE) {
             session_start();
+            if (!array_key_exists(self::CHAVE_FLASH_GUARDAR, $_SESSION)) {
+                $_SESSION[self::CHAVE_FLASH_GUARDAR] = [];
+            }
+            if (!array_key_exists(self::CHAVE_FLASH_USAR, $_SESSION)) {
+                $_SESSION[self::CHAVE_FLASH_USAR] = [];
+            }
+            $_SESSION[self::CHAVE_FLASH_USAR] = $_SESSION[self::CHAVE_FLASH_GUARDAR];
+            $_SESSION[self::CHAVE_FLASH_GUARDAR] = [];
         }
     }
 }
