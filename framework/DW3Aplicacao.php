@@ -7,6 +7,7 @@ class DW3Aplicacao
 
     public function __construct()
     {
+        DW3Sessao::iniciar();
         $this->roteador = new DW3Roteador();
     }
 
