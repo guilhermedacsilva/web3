@@ -3,6 +3,7 @@ namespace Teste\Funcional;
 
 use \Teste\Teste;
 use \Modelo\Reclamacao;
+use \Framework\DW3BancoDeDados;
 
 class TesteReclamacoes extends Teste
 {
@@ -12,96 +13,53 @@ class TesteReclamacoes extends Teste
         $this->verificarRedirecionar($resposta, URL_RAIZ . 'login');
     }
 
-    /*
-    public function testeIndexComDados()
+    public function testeListagem()
     {
-        (new Reclamacao('Joao', 'Rua Z', '11', '22', '33'))->salvar();
+        $this->logarAdmin();
+        (new Reclamacao('2000-01-01', 'UTFPR', 'desc', 1))->salvar();
         $resposta = $this->get(URL_RAIZ . 'reclamacoes');
-        $this->verificarContem($resposta, 'Joao');
-        $this->verificarContem($resposta, 'Rua Z');
-        $this->verificarContem($resposta, '11');
-        $this->verificarContem($resposta, '22');
-        $this->verificarContem($resposta, '33');
-    }
-
-    public function testeCriar()
-    {
-        $resposta = $this->get(URL_RAIZ . 'reclamacoes/criar');
-        $this->verificarContem($resposta, 'Cadastro de Reclamacao');
-    }
-
-    public function testeEditar()
-    {
-        $reclamacao = new Reclamacao('Joao', 'Rua Z', '11', '22', '33');
-        $reclamacao->salvar();
-        $resposta = $this->get(URL_RAIZ . 'reclamacoes/' . $reclamacao->getId() . '/editar');
-        $this->verificarContem($resposta, 'Edição de Reclamacao');
-        $this->verificarContem($resposta, $reclamacao->getNome());
-        $this->verificarContem($resposta, $reclamacao->getEndereco());
-        $this->verificarContem($resposta, $reclamacao->getTelefone1());
-        $this->verificarContem($resposta, $reclamacao->getTelefone2());
-        $this->verificarContem($resposta, $reclamacao->getTelefone3());
-    }
-
-    public function testeMostrar()
-    {
-        $reclamacao = new Reclamacao('Joao', 'Rua Z', '11', '22', '33');
-        $reclamacao->salvar();
-        $resposta = $this->get(URL_RAIZ . 'reclamacoes/' . $reclamacao->getId());
-        $this->verificarContem($resposta, 'Mostrando Reclamacao');
-        $this->verificarContem($resposta, $reclamacao->getNome());
-        $this->verificarContem($resposta, $reclamacao->getEndereco());
-        $this->verificarContem($resposta, $reclamacao->getTelefone1());
-        $this->verificarContem($resposta, $reclamacao->getTelefone2());
-        $this->verificarContem($resposta, $reclamacao->getTelefone3());
-    }
-
-    public function testeArmazenar()
-    {
-        $resposta = $this->post(URL_RAIZ . 'reclamacoes', [
-            'nome' => 'Mario',
-            'endereco' => 'Rua A',
-            'telefone1' => '11',
-            'telefone2' => '22',
-            'telefone3' => '33',
-        ]);
-        $this->verificarRedirecionar($resposta, URL_RAIZ . 'reclamacoes');
-        $resposta = $this->get(URL_RAIZ . 'reclamacoes');
-        $this->verificarContem($resposta, 'Mario');
-        $this->verificarContem($resposta, 'Rua A');
-        $this->verificarContem($resposta, '11');
-        $this->verificarContem($resposta, '22');
-        $this->verificarContem($resposta, '33');
+        $this->verificarContem($resposta, 'Reclamações');
+        $this->verificarContem($resposta, 'UTFPR');
     }
 
     public function testeAtualizar()
     {
-        $reclamacao = new Reclamacao('Joao', 'Rua Z', '11', '22', '33');
+        $this->logarAdmin();
+        $reclamacao = new Reclamacao('2000-01-01', 'UTFPR', 'desc', 1);
         $reclamacao->salvar();
-        $resposta = $this->patch(URL_RAIZ . 'reclamacoes/' . $reclamacao->getId(), [
-            'nome' => 'Mario',
-            'endereco' => 'Rua A',
-            'telefone1' => '44',
-            'telefone2' => '55',
-            'telefone3' => '66',
-        ]);
+        $resposta = $this->patch(URL_RAIZ . 'reclamacoes/' . $reclamacao->getId());
         $this->verificarRedirecionar($resposta, URL_RAIZ . 'reclamacoes');
         $resposta = $this->get(URL_RAIZ . 'reclamacoes');
-        $this->verificarContem($resposta, 'Mario');
-        $this->verificarContem($resposta, 'Rua A');
-        $this->verificarContem($resposta, '44');
-        $this->verificarContem($resposta, '55');
-        $this->verificarContem($resposta, '66');
+        $this->verificarContem($resposta, 'Nenhuma reclamação encontrada');
+        $this->verificarContem($resposta, 'Reclamação atendida com sucesso');
     }
 
-    public function testeDestruir()
+    public function testeCriarDeslogado()
     {
-        $reclamacao = new Reclamacao('Joao', 'Rua Z', '11', '22', '33');
-        $reclamacao->salvar();
-        $resposta = $this->delete(URL_RAIZ . 'reclamacoes/' . $reclamacao->getId());
-        $this->verificarRedirecionar($resposta, URL_RAIZ . 'reclamacoes');
-        $resposta = $this->get(URL_RAIZ . 'reclamacoes');
-        $this->verificarNaoContem($resposta, 'Joao');
+        $resposta = $this->get(URL_RAIZ . 'reclamacoes/criar');
+        $this->verificarRedirecionar($resposta, URL_RAIZ . 'login');
     }
-    */
+
+    public function testeCriar()
+    {
+        $this->logarNormal();
+        $resposta = $this->get(URL_RAIZ . 'reclamacoes/criar');
+        $this->verificarContem($resposta, 'Cadastro de Reclamação');
+    }
+
+    public function testeArmazenar()
+    {
+        $this->logarNormal();
+        $resposta = $this->post(URL_RAIZ . 'reclamacoes', [
+            'dataIncidente' => 'Bruno',
+            'local' => 'Rua A',
+            'descricao' => 'desc',
+        ]);
+        $this->verificarRedirecionar($resposta, URL_RAIZ . 'reclamacoes/criar');
+        $resposta = $this->get(URL_RAIZ . 'reclamacoes/criar');
+        $this->verificarContem($resposta, 'Reclamação cadastrada com sucesso');
+        $query = DW3BancoDeDados::query('SELECT * FROM reclamacoes');
+        $bdReclamacoes = $query->fetchAll();
+        $this->verificar(count($bdReclamacoes) == 1);
+    }
 }
