@@ -2,7 +2,6 @@
 namespace Controlador;
 
 use \Modelo\Reclamacao;
-use \Modelo\Usuario;
 use \Framework\DW3Sessao;
 
 class ReclamacaoControlador extends Controlador
