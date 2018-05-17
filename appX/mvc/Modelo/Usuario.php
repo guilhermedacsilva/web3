@@ -43,7 +43,7 @@ class Usuario extends Modelo
     {
         $imagemNome = "{$this->id}.jpg";
         if (!DW3ImagemUpload::existe($imagemNome)) {
-            $imagemNome = "padrao.jpg";
+            $imagemNome = "padrao.png";
         }
         return $imagemNome;
     }
