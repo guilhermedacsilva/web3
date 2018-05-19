@@ -53,7 +53,7 @@ class TesteReclamacao extends Teste
         $reclamacao->setDataAtendimento();
         $reclamacao->salvar();
 
-        $reclamacao = new Reclamacao('2111-01-01', 'UNICENTRO', 'desc 2', $this->usuarioId);
+        $reclamacao = new Reclamacao('2001-01-01', 'UNICENTRO', 'desc 2', $this->usuarioId);
         $reclamacao->salvar();
 
         $reclamacoes = Reclamacao::buscarNaoAtendidos();
