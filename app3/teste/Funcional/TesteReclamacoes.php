@@ -51,7 +51,7 @@ class TesteReclamacoes extends Teste
     {
         $this->logarNormal();
         $resposta = $this->post(URL_RAIZ . 'reclamacoes', [
-            'dataIncidente' => 'Bruno',
+            'dataIncidente' => '2000-01-01',
             'local' => 'Rua A',
             'descricao' => 'desc',
         ]);

@@ -24,7 +24,7 @@ class TesteUsuario extends Teste
         $this->verificar($contato1->getNome() == $contato2->getNome());
     }
 
-    public function testeBuscarTodos()
+    public function testeBuscarNome()
     {
         (new Usuario('Maria', '123'))->salvar();
         $contato = Usuario::buscarNome('Maria');
