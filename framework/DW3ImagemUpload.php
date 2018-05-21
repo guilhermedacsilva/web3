@@ -3,12 +3,6 @@ namespace Framework;
 
 class DW3ImagemUpload
 {
-    const TIPOS_PERMITIDOS = [
-        IMAGETYPE_JPEG,
-        // IMAGETYPE_PNG,
-        // IMAGETYPE_GIF,
-    ];
-
     const ARQUIVO_NOME = 'tmp_name';
     const TAMANHO = 'size';
     const KILOBYTE = 1024;
@@ -34,14 +28,6 @@ class DW3ImagemUpload
            pode ocorrer falso positivo */
         return self::existeUpload($arquivoUpload)
             && getimagesize($arquivoUpload[self::ARQUIVO_NOME]);
-    }
-
-    private static function isTipoPermitido($arquivoUpload)
-    {
-        $imagemTipo = exif_imagetype($arquivo[self::ARQUIVO_NOME]);
-        if (!in_array($imagemTipo, self::TIPOS_PERMITIDOS)) {
-            return false;
-        }
     }
 
     public static function salvar($arquivo, $destino)

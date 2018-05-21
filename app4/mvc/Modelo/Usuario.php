@@ -63,7 +63,7 @@ class Usuario extends Modelo
         }
         if (DW3ImagemUpload::existeUpload($this->foto)
             && !DW3ImagemUpload::isValida($this->foto)) {
-            $this->setErroMensagem('foto', 'Deve ser JPG de no máximo 500 KB.');
+            $this->setErroMensagem('foto', 'Deve ser de no máximo 500 KB.');
         }
     }
 
