@@ -10,9 +10,10 @@ class MensagemControlador extends Controlador
     {
         $this->verificarLogado();
         $pagina = array_key_exists('p', $_GET) ? intval($_GET['p']) : 1;
-        $offset = ($pagina - 1) * 4;
-        $mensagens = Mensagem::buscarTodos($offset);
-        $ultimaPagina = ceil(Mensagem::contarTodos() / 4.0);
+        $limit = 4;
+        $offset = ($pagina - 1) * $limit;
+        $mensagens = Mensagem::buscarTodos($limit, $offset);
+        $ultimaPagina = ceil(Mensagem::contarTodos() / (float)$limit);
         $this->visao('mensagens/index.php', [
             'mensagens' => $mensagens,
             'pagina' => $pagina,
