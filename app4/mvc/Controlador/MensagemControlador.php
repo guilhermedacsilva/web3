@@ -13,7 +13,7 @@ class MensagemControlador extends Controlador
         $limit = 4;
         $offset = ($pagina - 1) * $limit;
         $mensagens = Mensagem::buscarTodos($limit, $offset);
-        $ultimaPagina = ceil(Mensagem::contarTodos() / (float)$limit);
+        $ultimaPagina = ceil(Mensagem::contarTodos() / $limit);
         $this->visao('mensagens/index.php', [
             'mensagens' => $mensagens,
             'pagina' => $pagina,
