@@ -1,5 +1,5 @@
 RewriteEngine On
 
 # Se não for para a pasta pública, executa o index.php
-RewriteCond %{REQUEST_FILENAME} !appX/publico/
+RewriteCond %{REQUEST_FILENAME} !app4/publico/
 RewriteRule ^ index.php

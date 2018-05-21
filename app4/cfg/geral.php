@@ -3,7 +3,7 @@
 const APLICACAO_NOME = 'Chat Online';
 
 // Se a URL_RAIZ mudar, verifique arquivo .htaccess
-const URL_RAIZ = '/web3/appX/';
+const URL_RAIZ = '/web3/app4/';
 
 // Os caminhos sempre devem terminar com '/'
 

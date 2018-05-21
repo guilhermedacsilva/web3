@@ -4,7 +4,7 @@ $banco = [
     'driver' => 'mysql',
     'servidor' => 'localhost',
     'porta' => '3306',
-    'banco' => 'appx',
+    'banco' => 'app4',
     'usuario' => 'root',
     'senha' => '',
 ];

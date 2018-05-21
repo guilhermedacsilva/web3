@@ -1,4 +1,4 @@
-CREATE DATABASE app2 COLLATE 'utf8mb4_unicode_ci';
+CREATE DATABASE app2 COLLATE 'utf8_unicode_ci';
 
 CREATE TABLE contatos (
     id INT NOT NULL AUTO_INCREMENT ,

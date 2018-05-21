@@ -3,15 +3,25 @@ namespace Controlador;
 
 use \Framework\DW3Controlador;
 use \Framework\DW3Sessao;
+use \Modelo\Usuario;
 
 abstract class Controlador extends DW3Controlador
 {
-    protected function verificarLogado()
+    protected $usuario;
+
+	protected function verificarLogado()
     {
-        if (DW3Sessao::get('usuario') === null) {
-            $this->redirecionar(URL_RAIZ . 'login');
-            return false;
+    	$usuario = $this->getUsuario();
+        if ($usuario == null) {
+        	$this->redirecionar(URL_RAIZ . 'login');
         }
-        return true;
+    }
+
+    protected function getUsuario()
+    {
+        if ($this->usuario == null) {
+        	$usuario = DW3Sessao::get('usuario');
+        }
+        return $usuario;
     }
 }

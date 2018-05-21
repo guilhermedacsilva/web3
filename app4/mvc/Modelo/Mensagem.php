@@ -6,9 +6,10 @@ use \Framework\DW3BancoDeDados;
 
 class Mensagem extends Modelo
 {
-    const BUSCAR_TODOS = 'SELECT m.texto, m.id m_id, u.id u_id, u.email FROM mensagens m JOIN usuarios u ON (m.usuario_id = u.id) ORDER BY m.id';
+    const BUSCAR_TODOS = 'SELECT m.texto, m.id m_id, u.id u_id, u.email FROM mensagens m JOIN usuarios u ON (m.usuario_id = u.id) ORDER BY m.id LIMIT 4 OFFSET ?';
     const INSERIR = 'INSERT INTO mensagens(usuario_id,texto) VALUES (?, ?)';
     const DELETAR = 'DELETE FROM mensagens WHERE id = ?';
+    const CONTAR_TODOS = 'SELECT count(id) FROM mensagens';
     private $id;
     private $usuarioId;
     private $texto;
@@ -57,9 +58,12 @@ class Mensagem extends Modelo
         DW3BancoDeDados::getPdo()->commit();
     }
 
-    public static function buscarTodos()
+    public static function buscarTodos($offset = 0)
     {
-        $registros = DW3BancoDeDados::query(self::BUSCAR_TODOS);
+        $comando = DW3BancoDeDados::prepare(self::BUSCAR_TODOS);
+        $comando->bindParam(1, $offset, PDO::PARAM_INT);
+        $comando->execute();
+        $registros = $comando->fetchAll();
         $objetos = [];
         foreach ($registros as $registro) {
             $usuario = new Usuario(
@@ -76,6 +80,13 @@ class Mensagem extends Modelo
             );
         }
         return $objetos;
+    }
+
+    public static function contarTodos()
+    {
+        $registros = DW3BancoDeDados::query(self::CONTAR_TODOS);
+        $total = $registros->fetch();
+        return intval($total[0]);
     }
 
     public static function destruir($id)

@@ -41,13 +41,22 @@ class DW3Roteador
     public function interpretarRota()
     {
         // exemplo: /app/login
-        $caminhoRequisicao = $_SERVER['REQUEST_URI'];
+        $caminhoRequisicao = $this->removerParametrosGet($_SERVER['REQUEST_URI']);
 
         // exemplo: /login
         $caminhoRota = $this->removerUrlRaiz($caminhoRequisicao);
 
         // classe DW3Rota
         $this->resultado = $this->recuperarRota($caminhoRota);
+    }
+
+    private function removerParametrosGet($caminhoRequisicao)
+    {
+        $posicao = strpos($caminhoRequisicao, '?');
+        if ($posicao !== false) {
+            return substr($caminhoRequisicao, 0, $posicao);
+        }
+        return $caminhoRequisicao;
     }
 
     private function removerUrlRaiz($caminhoRequisicao)

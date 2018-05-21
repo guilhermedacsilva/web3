@@ -8,39 +8,41 @@ class MensagemControlador extends Controlador
 {
     public function index()
     {
-        if ($this->verificarLogado()) {
-            $mensagens = Mensagem::buscarTodos();
-            $this->visao('mensagens/index.php', [
-                'mensagens' => $mensagens
-            ]);
-        }
+        $this->verificarLogado();
+        $pagina = array_key_exists('p', $_GET) ? intval($_GET['p']) : 1;
+        $offset = ($pagina - 1) * 4;
+        $mensagens = Mensagem::buscarTodos($offset);
+        $ultimaPagina = ceil(Mensagem::contarTodos() / 4.0);
+        $this->visao('mensagens/index.php', [
+            'mensagens' => $mensagens,
+            'pagina' => $pagina,
+            'ultimaPagina' => $ultimaPagina
+        ]);
     }
 
     public function armazenar()
     {
-        if ($this->verificarLogado()) {
-            $mensagem = new Mensagem(
-                DW3Sessao::get('usuario'),
-                $_POST['texto']
-            );
-            if ($mensagem->isValido()) {
-                $mensagem->salvar();
-                $this->redirecionar(URL_RAIZ . 'mensagens');
+        $this->verificarLogado();
+        $mensagem = new Mensagem(
+            DW3Sessao::get('usuario'),
+            $_POST['texto']
+        );
+        if ($mensagem->isValido()) {
+            $mensagem->salvar();
+            $this->redirecionar(URL_RAIZ . 'mensagens');
 
-            } else {
-                $this->setErros($mensagem->getValidacaoErros());
-                $this->visao('mensagens/index.php', [
-                    'mensagens' => Mensagem::buscarTodos()
-                ]);
-            }
+        } else {
+            $this->setErros($mensagem->getValidacaoErros());
+            $this->visao('mensagens/index.php', [
+                'mensagens' => Mensagem::buscarTodos()
+            ]);
         }
     }
 
     public function destruir($id)
     {
-        if ($this->verificarLogado()) {
-            Mensagem::destruir($id);
-            $this->redirecionar(URL_RAIZ . 'mensagens');
-        }
+        $this->verificarLogado();
+        Mensagem::destruir($id);
+        $this->redirecionar(URL_RAIZ . 'mensagens');
     }
 }
