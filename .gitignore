@@ -1,5 +1,5 @@
 # Ignore as imagens de upload
-**/publico/img/*
+**/img/*
 
 # Não ignore as imagens do sistema
-!**/publico/img/padrao.jpg
+!**/img/padrao.png
