@@ -3,41 +3,46 @@ namespace Teste\Funcional;
 
 use \Teste\Teste;
 use \Modelo\Usuario;
+use \Framework\DW3Sessao;
 
 class TesteLogin extends Teste
 {
-    public function testeRedirecionarRaizLogin()
-    {
-        $resposta = $this->get(URL_RAIZ);
-        $this->verificar($resposta['redirecionar'] == URL_RAIZ.'login');
-    }
-
-    public function testeAcessarLogin()
+    public function testeAcessar()
     {
         $resposta = $this->get(URL_RAIZ . 'login');
-        $this->verificar(strpos($resposta['html'], 'Login') !== false);
+        $this->verificarContem($resposta, 'Login');
     }
 
     public function testeLogin()
     {
-        $usuario = new Usuario('joao', '1234', null);
-        $usuario->salvar();
+        (new Usuario('joao@teste.com', '123'))->salvar();
         $resposta = $this->post(URL_RAIZ . 'login', [
-            'email' => 'joao',
-            'senha' => '1234'
+            'email' => 'joao@teste.com',
+            'senha' => '123'
         ]);
-        $this->verificar($resposta['redirecionar'] == URL_RAIZ . 'mensagens');
-        $resposta = $this->get(URL_RAIZ . 'mensagens');
-        $this->verificar(strpos($resposta['html'], '<h2>Escreva a mensagem</h2>') !== false);
+        $this->verificarRedirecionar($resposta, URL_RAIZ . 'mensagens');
+        $this->verificar(DW3Sessao::get('usuario') != null);
     }
 
-    public function testeLogout()
+    public function testeLoginInvalido()
     {
-        $usuario = new Usuario('joao', '1234', null);
-        $usuario->salvar();
-        $_SESSION = ['usuario' => '1'];
+        $resposta = $this->post(URL_RAIZ . 'login', [
+            'email' => 'joao@teste.com',
+            'senha' => '123'
+        ]);
+        $this->verificarContem($resposta, 'joao@teste.com');
+        $this->verificar(DW3Sessao::get('usuario') == null);
+    }
+
+    public function testeDeslogar()
+    {
+        (new Usuario('joao@teste.com', '123'))->salvar();
+        $resposta = $this->post(URL_RAIZ . 'login', [
+            'email' => 'joao@teste.com',
+            'senha' => '123'
+        ]);
         $resposta = $this->delete(URL_RAIZ . 'login');
-        $this->verificar(!array_key_exists('usuario', $_SESSION));
-        $this->verificar($resposta['redirecionar'] == URL_RAIZ . 'login');
+        $this->verificarRedirecionar($resposta, URL_RAIZ . 'login');
+        $this->verificar(DW3Sessao::get('usuario') == null);
     }
 }

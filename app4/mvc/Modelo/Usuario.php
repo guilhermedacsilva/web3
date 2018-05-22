@@ -7,7 +7,6 @@ use \Framework\DW3ImagemUpload;
 
 class Usuario extends Modelo
 {
-    const BUSCAR_TODOS = 'SELECT * FROM usuarios ORDER BY email';
     const BUSCAR_POR_EMAIL = 'SELECT * FROM usuarios WHERE email = ? LIMIT 1';
     const INSERIR = 'INSERT INTO usuarios(email,senha) VALUES (?, ?)';
     private $id;
@@ -19,8 +18,8 @@ class Usuario extends Modelo
     public function __construct(
         $email,
         $senha,
-        $foto,
-        $id = -1
+        $foto = null,
+        $id = 0
     ) {
         $this->id = $id;
         $this->email = $email;

@@ -7,6 +7,7 @@ use \Framework\DW3BancoDeDados;
 class Mensagem extends Modelo
 {
     const BUSCAR_TODOS = 'SELECT m.texto, m.id m_id, u.id u_id, u.email FROM mensagens m JOIN usuarios u ON (m.usuario_id = u.id) ORDER BY m.id LIMIT ? OFFSET ?';
+    const BUSCAR_ID = 'SELECT * FROM mensagens WHERE id = ? LIMIT 1';
     const INSERIR = 'INSERT INTO mensagens(usuario_id,texto) VALUES (?, ?)';
     const DELETAR = 'DELETE FROM mensagens WHERE id = ?';
     const CONTAR_TODOS = 'SELECT count(id) FROM mensagens';
@@ -42,6 +43,11 @@ class Mensagem extends Modelo
         return $this->usuario;
     }
 
+    public function getUsuarioId()
+    {
+        return $this->usuarioId;
+    }
+
     public function salvar()
     {
         $this->inserir();
@@ -56,6 +62,24 @@ class Mensagem extends Modelo
         $comando->execute();
         $this->id = DW3BancoDeDados::getPdo()->lastInsertId();
         DW3BancoDeDados::getPdo()->commit();
+    }
+
+    public static function buscarId($id)
+    {
+        $comando = DW3BancoDeDados::prepare(self::BUSCAR_ID);
+        $comando->bindParam(1, $id, PDO::PARAM_INT);
+        $comando->execute();
+        $objeto = null;
+        $registro = $comando->fetch();
+        if ($registro) {
+            $objeto = new Mensagem(
+                $registro['usuario_id'],
+                $registro['texto'],
+                null,
+                $registro['id']
+            );
+        }
+        return $objeto;
     }
 
     public static function buscarTodos($limit = 4, $offset = 0)

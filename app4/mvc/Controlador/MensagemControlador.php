@@ -17,7 +17,8 @@ class MensagemControlador extends Controlador
         $this->visao('mensagens/index.php', [
             'mensagens' => $mensagens,
             'pagina' => $pagina,
-            'ultimaPagina' => $ultimaPagina
+            'ultimaPagina' => $ultimaPagina,
+            'mensagemFlash' => DW3Sessao::getFlash('mensagemFlash')
         ]);
     }
 
@@ -30,6 +31,7 @@ class MensagemControlador extends Controlador
         );
         if ($mensagem->isValido()) {
             $mensagem->salvar();
+            DW3Sessao::setFlash('mensagemFlash', 'Mensagem cadastrada.');
             $this->redirecionar(URL_RAIZ . 'mensagens');
 
         } else {
@@ -43,7 +45,11 @@ class MensagemControlador extends Controlador
     public function destruir($id)
     {
         $this->verificarLogado();
-        Mensagem::destruir($id);
+        $mensagem = Mensagem::buscarId($id);
+        if ($mensagem->getUsuarioId() == $this->getUsuario()) {
+            Mensagem::destruir($id);
+            DW3Sessao::setFlash('mensagemFlash', 'Mensagem destruida.');
+        }
         $this->redirecionar(URL_RAIZ . 'mensagens');
     }
 }

@@ -1,5 +1,13 @@
 <div class="center-block site">
     <h1 class="text-center">Chat Online</h1>
+    
+    <?php if ($mensagemFlash) : ?>
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <?= $mensagemFlash ?>
+        </div>
+    <?php endif ?>
+    
     <h2>Escreva a mensagem</h2>
     <div class="margin-bottom">
         <form action="<?= URL_RAIZ . 'mensagens' ?>" method="post" class="form-inline pull-left margin-right">
@@ -14,7 +22,7 @@
             <button type="submit" class="btn btn-danger">Sair</button>
         </form>
     </div>
-    
+
     <h2>Mensagens</h2>
     <?php foreach ($mensagens as $mensagem) : ?>
         <form action="<?= URL_RAIZ . 'mensagens/' . $mensagem->getId() ?>" method="post" class="clearfix margin-bottom">

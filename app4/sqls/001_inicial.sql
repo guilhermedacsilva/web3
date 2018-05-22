@@ -1,4 +1,4 @@
-CREATE DATABASE chat COLLATE 'utf8_unicode_ci';
+CREATE DATABASE app4 COLLATE 'utf8_unicode_ci';
 
 CREATE TABLE usuarios (
     id INT NOT NULL AUTO_INCREMENT ,
