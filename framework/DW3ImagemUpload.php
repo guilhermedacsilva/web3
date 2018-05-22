@@ -35,6 +35,7 @@ class DW3ImagemUpload
         move_uploaded_file($arquivo[self::ARQUIVO_NOME], $destino);
     }
 
+    /* Verifica se existe a imagem já salva na pasta img */
     public static function existe($imagemNome)
     {
         return file_exists(PASTA_PUBLICO . "img/$imagemNome");
