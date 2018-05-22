@@ -9,6 +9,13 @@ abstract class DW3Modelo
     protected function verificarErros() {
     }
 
+    /* Chamado na validação do modelo */
+    protected function setErroMensagem($nome, $mensagem)
+    {
+        $this->__erros[$nome] = $mensagem;
+    }
+
+    /* Chamado pelo controlador */
 	public function isValido()
     {
     	$this->__erros = [];
@@ -16,11 +23,7 @@ abstract class DW3Modelo
         return empty($this->__erros);
     }
 
-    protected function setErroMensagem($nome, $mensagem)
-    {
-    	$this->__erros[$nome] = $mensagem;
-    }
-
+    /* Chamado pelo controlador */
     public function getValidacaoErros()
     {
     	return $this->__erros;

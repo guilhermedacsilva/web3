@@ -7,6 +7,8 @@ use \Modelo\Usuario;
 
 abstract class Controlador extends DW3Controlador
 {
+    use ControladorVisao;
+    
     protected $usuario;
 
 	protected function verificarLogado()
