@@ -2,41 +2,36 @@
 namespace Controlador;
 
 use \Modelo\Venda;
+use \Modelo\Produto;
+use \Framework\DW3Sessao;
 
 class VendaControlador extends Controlador
 {
-    /*
-    public function index()
+    public function criar()
     {
-        $pagina = array_key_exists('p', $_GET) ? intval($_GET['p']) : 1;
-        $limit = 4;
-        $offset = ($pagina - 1) * $limit;
-        $mensagens = Venda::buscarTodos($limit, $offset);
-        $ultimaPagina = ceil(Venda::contarTodos() / $limit);
-        $this->visao('mensagens/index.php', [
-            'mensagens' => $mensagens,
-            'pagina' => $pagina,
-            'ultimaPagina' => $ultimaPagina,
-            'mensagemFlash' => DW3Sessao::getFlash('mensagemFlash')
+        $this->visao('vendas/criar.php', [
+            'produtos' => Produto::buscarTodos(),
+            'sucesso' => DW3Sessao::getFlash('sucesso')
         ]);
     }
-    */
 
     public function armazenar()
     {
-        $mensagem = new Venda(
-            DW3Sessao::get('usuario'),
-            $_POST['texto']
+        $venda = new Venda(
+            $_POST['produtoId'],
+            $_POST['quantidade'],
+            $_POST['precoTotal']
         );
-        if ($mensagem->isValido()) {
-            $mensagem->salvar();
-            DW3Sessao::setFlash('mensagemFlash', 'Venda cadastrada.');
-            $this->redirecionar(URL_RAIZ . 'mensagens');
 
+        if ($venda->isValido()) {
+            $venda->salvar();
+            DW3Sessao::setFlash('sucesso', 'Venda cadastrada.');
+            $this->redirecionar(URL_RAIZ . 'vendas/criar');
         } else {
-            $this->setErros($mensagem->getValidacaoErros());
-            $this->visao('mensagens/index.php', [
-                'mensagens' => Venda::buscarTodos()
+            $this->setErros($venda->getValidacaoErros());
+            $this->visao('vendas/criar.php', [
+                'produtos' => Produto::buscarTodos(),
+                'sucesso' => null
             ]);
         }
     }
