@@ -89,7 +89,7 @@ class Reclamacao extends Modelo
         DW3BancoDeDados::getPdo()->beginTransaction();
         $comando = DW3BancoDeDados::prepare(self::INSERIR);
         $comando->bindValue(1, $this->dataIncidente, PDO::PARAM_STR);
-        $comando->bindValue(2, $this->local, PDO::PARAM_STR, 255);
+        $comando->bindValue(2, $this->local, PDO::PARAM_STR);
         $comando->bindValue(3, $this->descricao, PDO::PARAM_STR);
         $comando->bindValue(4, $this->usuarioId, PDO::PARAM_INT);
         $comando->execute();

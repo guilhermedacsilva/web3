@@ -102,11 +102,11 @@ class Contato extends Modelo
     {
         DW3BancoDeDados::getPdo()->beginTransaction();
         $comando = DW3BancoDeDados::prepare(self::INSERIR);
-        $comando->bindValue(1, $this->nome, PDO::PARAM_STR, 255);
-        $comando->bindValue(2, $this->endereco, PDO::PARAM_STR, 255);
-        $comando->bindValue(3, $this->telefone1, PDO::PARAM_STR, 255);
-        $comando->bindValue(4, $this->telefone2, PDO::PARAM_STR, 255);
-        $comando->bindValue(5, $this->telefone3, PDO::PARAM_STR, 255);
+        $comando->bindValue(1, $this->nome, PDO::PARAM_STR);
+        $comando->bindValue(2, $this->endereco, PDO::PARAM_STR);
+        $comando->bindValue(3, $this->telefone1, PDO::PARAM_STR);
+        $comando->bindValue(4, $this->telefone2, PDO::PARAM_STR);
+        $comando->bindValue(5, $this->telefone3, PDO::PARAM_STR);
         $comando->execute();
         $this->id = DW3BancoDeDados::getPdo()->lastInsertId();
         DW3BancoDeDados::getPdo()->commit();
@@ -115,11 +115,11 @@ class Contato extends Modelo
     public function atualizar()
     {
         $comando = DW3BancoDeDados::prepare(self::ATUALIZAR);
-        $comando->bindValue(1, $this->nome, PDO::PARAM_STR, 255);
-        $comando->bindValue(2, $this->endereco, PDO::PARAM_STR, 255);
-        $comando->bindValue(3, $this->telefone1, PDO::PARAM_STR, 255);
-        $comando->bindValue(4, $this->telefone2, PDO::PARAM_STR, 255);
-        $comando->bindValue(5, $this->telefone3, PDO::PARAM_STR, 255);
+        $comando->bindValue(1, $this->nome, PDO::PARAM_STR);
+        $comando->bindValue(2, $this->endereco, PDO::PARAM_STR);
+        $comando->bindValue(3, $this->telefone1, PDO::PARAM_STR);
+        $comando->bindValue(4, $this->telefone2, PDO::PARAM_STR);
+        $comando->bindValue(5, $this->telefone3, PDO::PARAM_STR);
         $comando->bindValue(6, $this->id, PDO::PARAM_INT);
         $comando->execute();
     }

@@ -68,8 +68,8 @@ class Usuario extends Modelo
     {
         DW3BancoDeDados::getPdo()->beginTransaction();
         $comando = DW3BancoDeDados::prepare(self::INSERIR);
-        $comando->bindValue(1, $this->nome, PDO::PARAM_STR, 255);
-        $comando->bindValue(2, $this->senha, PDO::PARAM_STR, 255);
+        $comando->bindValue(1, $this->nome, PDO::PARAM_STR);
+        $comando->bindValue(2, $this->senha, PDO::PARAM_STR);
         $comando->execute();
         $this->id = DW3BancoDeDados::getPdo()->lastInsertId();
         DW3BancoDeDados::getPdo()->commit();
