@@ -39,11 +39,16 @@ class RelatorioVenda
         }
         $comando->execute();
         $registros = $comando->fetchAll();
-        $total = 0;
+        $totalPreco = 0;
+        $totalQuantidade = 0;
         foreach ($registros as $registro) {
-            $total += $registro['preco_total'];
+            $totalQuantidade += $registro['quantidade'];
+            $totalPreco += $registro['preco_total'];
         }
-        $registros[] = ['preco_total' => $total];
+        $registros[] = [
+            'quantidade' => $totalQuantidade,
+            'preco_total' => $totalPreco
+        ];
         return $registros;
     }
 }

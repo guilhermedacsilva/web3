@@ -40,7 +40,8 @@
 		</tr>
 	<?php endfor ?>
 	<tr class="active negrito">
-		<td colspan="2">TOTAL</td>
+		<td>TOTAL</td>
+		<td class="text-right"><?= $registros[$i]['quantidade'] ?></td>
 		<td class="text-right"><?= number_format($registros[$i]['preco_total'], 2, ',', '.') ?></td>
 	</tr>
 </table>
