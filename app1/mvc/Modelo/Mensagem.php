@@ -41,8 +41,8 @@ class Mensagem extends Modelo
     {
         DW3BancoDeDados::getPdo()->beginTransaction();
         $comando = DW3BancoDeDados::prepare(self::INSERIR);
-        $comando->bindParam(1, $this->usuario, PDO::PARAM_STR, 255);
-        $comando->bindParam(2, $this->texto, PDO::PARAM_STR, 255);
+        $comando->bindValue(1, $this->usuario, PDO::PARAM_STR, 255);
+        $comando->bindValue(2, $this->texto, PDO::PARAM_STR, 255);
         $comando->execute();
         $this->id = DW3BancoDeDados::getPdo()->lastInsertId();
         DW3BancoDeDados::getPdo()->commit();

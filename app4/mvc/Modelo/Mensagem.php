@@ -57,8 +57,8 @@ class Mensagem extends Modelo
     {
         DW3BancoDeDados::getPdo()->beginTransaction();
         $comando = DW3BancoDeDados::prepare(self::INSERIR);
-        $comando->bindParam(1, $this->usuarioId, PDO::PARAM_INT);
-        $comando->bindParam(2, $this->texto, PDO::PARAM_STR, 255);
+        $comando->bindValue(1, $this->usuarioId, PDO::PARAM_INT);
+        $comando->bindValue(2, $this->texto, PDO::PARAM_STR, 255);
         $comando->execute();
         $this->id = DW3BancoDeDados::getPdo()->lastInsertId();
         DW3BancoDeDados::getPdo()->commit();
@@ -67,7 +67,7 @@ class Mensagem extends Modelo
     public static function buscarId($id)
     {
         $comando = DW3BancoDeDados::prepare(self::BUSCAR_ID);
-        $comando->bindParam(1, $id, PDO::PARAM_INT);
+        $comando->bindValue(1, $id, PDO::PARAM_INT);
         $comando->execute();
         $objeto = null;
         $registro = $comando->fetch();
@@ -85,8 +85,8 @@ class Mensagem extends Modelo
     public static function buscarTodos($limit = 4, $offset = 0)
     {
         $comando = DW3BancoDeDados::prepare(self::BUSCAR_TODOS);
-        $comando->bindParam(1, $limit, PDO::PARAM_INT);
-        $comando->bindParam(2, $offset, PDO::PARAM_INT);
+        $comando->bindValue(1, $limit, PDO::PARAM_INT);
+        $comando->bindValue(2, $offset, PDO::PARAM_INT);
         $comando->execute();
         $registros = $comando->fetchAll();
         $objetos = [];
@@ -117,7 +117,7 @@ class Mensagem extends Modelo
     public static function destruir($id)
     {
         $comando = DW3BancoDeDados::prepare(self::DELETAR);
-        $comando->bindParam(1, $id, PDO::PARAM_INT);
+        $comando->bindValue(1, $id, PDO::PARAM_INT);
         $comando->execute();
     }
 

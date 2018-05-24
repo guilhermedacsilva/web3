@@ -28,4 +28,10 @@ trait DW3ControladorVisao
 	{
 		return array_key_exists($campoNome, $_POST) ? $_POST[$campoNome] : '';
 	}
+
+	/* Caso o campo tenha sido enviado por GET, retorna o seu valor */
+	protected function getGet($campoNome)
+	{
+		return array_key_exists($campoNome, $_GET) ? $_GET[$campoNome] : '';
+	}
 }

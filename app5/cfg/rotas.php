@@ -10,7 +10,7 @@ $rotas = [
     '/vendas/criar' => [
         'GET' => '\Controlador\VendaControlador#criar',
     ],
-    '/relatorios/vendas' => [
+    '/relatorios/venda' => [
         'GET' => '\Controlador\RelatorioVendaControlador#index',
     ],
 ];

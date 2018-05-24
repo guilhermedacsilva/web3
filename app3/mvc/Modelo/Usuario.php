@@ -68,8 +68,8 @@ class Usuario extends Modelo
     {
         DW3BancoDeDados::getPdo()->beginTransaction();
         $comando = DW3BancoDeDados::prepare(self::INSERIR);
-        $comando->bindParam(1, $this->nome, PDO::PARAM_STR, 255);
-        $comando->bindParam(2, $this->senha, PDO::PARAM_STR, 255);
+        $comando->bindValue(1, $this->nome, PDO::PARAM_STR, 255);
+        $comando->bindValue(2, $this->senha, PDO::PARAM_STR, 255);
         $comando->execute();
         $this->id = DW3BancoDeDados::getPdo()->lastInsertId();
         DW3BancoDeDados::getPdo()->commit();
@@ -78,7 +78,7 @@ class Usuario extends Modelo
     public static function buscarId($id)
     {
         $comando = DW3BancoDeDados::prepare(self::BUSCAR_ID);
-        $comando->bindParam(1, $id, PDO::PARAM_INT);
+        $comando->bindValue(1, $id, PDO::PARAM_INT);
         $comando->execute();
         $registro = $comando->fetch();
         return new Usuario(
@@ -92,7 +92,7 @@ class Usuario extends Modelo
     public static function buscarNome($nome)
     {
         $comando = DW3BancoDeDados::prepare(self::BUSCAR_NOME);
-        $comando->bindParam(1, $nome, PDO::PARAM_STR);
+        $comando->bindValue(1, $nome, PDO::PARAM_STR);
         $comando->execute();
         $registro = $comando->fetch();
         $usuario = null;

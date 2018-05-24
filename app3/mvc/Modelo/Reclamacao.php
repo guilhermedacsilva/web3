@@ -88,10 +88,10 @@ class Reclamacao extends Modelo
     {
         DW3BancoDeDados::getPdo()->beginTransaction();
         $comando = DW3BancoDeDados::prepare(self::INSERIR);
-        $comando->bindParam(1, $this->dataIncidente, PDO::PARAM_STR);
-        $comando->bindParam(2, $this->local, PDO::PARAM_STR, 255);
-        $comando->bindParam(3, $this->descricao, PDO::PARAM_STR);
-        $comando->bindParam(4, $this->usuarioId, PDO::PARAM_INT);
+        $comando->bindValue(1, $this->dataIncidente, PDO::PARAM_STR);
+        $comando->bindValue(2, $this->local, PDO::PARAM_STR, 255);
+        $comando->bindValue(3, $this->descricao, PDO::PARAM_STR);
+        $comando->bindValue(4, $this->usuarioId, PDO::PARAM_INT);
         $comando->execute();
         $this->id = DW3BancoDeDados::getPdo()->lastInsertId();
         DW3BancoDeDados::getPdo()->commit();
@@ -100,15 +100,15 @@ class Reclamacao extends Modelo
     public function atualizar()
     {
         $comando = DW3BancoDeDados::prepare(self::ATUALIZAR);
-        $comando->bindParam(1, $this->dataAtendimento, PDO::PARAM_STR);
-        $comando->bindParam(2, $this->id, PDO::PARAM_INT);
+        $comando->bindValue(1, $this->dataAtendimento, PDO::PARAM_STR);
+        $comando->bindValue(2, $this->id, PDO::PARAM_INT);
         $comando->execute();
     }
 
     public static function buscarId($id)
     {
         $comando = DW3BancoDeDados::prepare(self::BUSCAR_ID);
-        $comando->bindParam(1, $id, PDO::PARAM_INT);
+        $comando->bindValue(1, $id, PDO::PARAM_INT);
         $comando->execute();
         $registro = $comando->fetch();
         return new Reclamacao(

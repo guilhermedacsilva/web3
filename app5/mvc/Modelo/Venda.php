@@ -55,9 +55,9 @@ class Venda extends Modelo
     {
         DW3BancoDeDados::getPdo()->beginTransaction();
         $comando = DW3BancoDeDados::prepare(self::INSERIR);
-        $comando->bindParam(1, $this->produtoId, PDO::PARAM_INT);
-        $comando->bindParam(2, $this->quantidade, PDO::PARAM_INT);
-        $comando->bindParam(3, $this->precoTotal, PDO::PARAM_STR, 255);
+        $comando->bindValue(1, $this->produtoId, PDO::PARAM_INT);
+        $comando->bindValue(2, $this->quantidade, PDO::PARAM_INT);
+        $comando->bindValue(3, $this->precoTotal, PDO::PARAM_STR, 255);
         $comando->execute();
         $this->id = DW3BancoDeDados::getPdo()->lastInsertId();
         DW3BancoDeDados::getPdo()->commit();
@@ -78,12 +78,17 @@ class Venda extends Modelo
         }
     }
 
+    public static function buscarRelatorio()
+    {
+        
+    }
+
     /*
     public static function buscarTodos($limit = 4, $offset = 0)
     {
         $comando = DW3BancoDeDados::prepare(self::BUSCAR_TODOS);
-        $comando->bindParam(1, $limit, PDO::PARAM_INT);
-        $comando->bindParam(2, $offset, PDO::PARAM_INT);
+        $comando->bindValue(1, $limit, PDO::PARAM_INT);
+        $comando->bindValue(2, $offset, PDO::PARAM_INT);
         $comando->execute();
         $registros = $comando->fetchAll();
         $objetos = [];

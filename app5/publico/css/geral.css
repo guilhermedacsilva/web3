@@ -18,3 +18,21 @@
     width: 5em;
     margin-right: 1em;
 }
+
+.largura100 {
+	width: 100%;
+}
+
+.negrito {
+	font-weight: bold;
+}
+
+.campo-metade {
+	width: 48%;
+	margin-right: 3%;
+	display: inline-block;
+}
+
+.campo-metade:last-child {
+	margin-right: 0;
+}

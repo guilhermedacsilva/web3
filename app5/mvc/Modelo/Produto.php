@@ -39,7 +39,7 @@ class Produto extends Modelo
     public static function buscarId($id)
     {
         $comando = DW3BancoDeDados::prepare(self::BUSCAR_ID);
-        $comando->bindParam(1, $id, PDO::PARAM_INT);
+        $comando->bindValue(1, $id, PDO::PARAM_INT);
         $comando->execute();
         $registro = $comando->fetch();
         if ($registro != false) {

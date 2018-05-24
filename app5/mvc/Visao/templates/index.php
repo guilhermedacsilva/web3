@@ -30,7 +30,7 @@
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
 	        <li><a href="<?= URL_RAIZ . 'vendas/criar' ?>">Vendas</a></li>
-	        <li><a href="#">Relatórios</a></li>
+	        <li><a href="<?= URL_RAIZ . 'relatorios/venda' ?>">Relatório</a></li>
 	      </ul>
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
