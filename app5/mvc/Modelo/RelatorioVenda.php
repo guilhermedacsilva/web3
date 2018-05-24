@@ -8,7 +8,7 @@ class RelatorioVenda
 {
     const BUSCAR_TODOS = 'SELECT p.nome as produto, v.quantidade, v.preco_total FROM vendas v JOIN produtos p ON (p.id = v.produto_id) WHERE 1=1';
 
-    public static function buscarRegistros($filtro)
+    public static function buscarRegistros($filtro = [])
     {
         $sqlWhere = '';
         $parametros = [];

@@ -55,9 +55,9 @@ abstract class DW3Teste
         }
     }
 
-    protected function get($url)
+    protected function get($url, $dados = [])
     {
-        return $this->requisicao('GET', $url);
+        return $this->requisicao('GET', $url, $dados);
     }
 
     protected function post($url, $dados = [])
@@ -81,7 +81,9 @@ abstract class DW3Teste
         DW3Controlador::modoTeste();
         $_SERVER['REQUEST_URI'] = $url;
         $_SERVER['REQUEST_METHOD'] = $metodo;
-        if ($metodo != 'GET') {
+        if ($metodo == 'GET') {
+            $_GET = $dados;
+        } else {
             $_POST = $dados;
         }
         $app = new DW3Aplicacao();
