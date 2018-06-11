@@ -3,17 +3,10 @@ namespace Framework;
 
 class DW3ImagemUpload
 {
-    const ARQUIVO_NOME = 'tmp_name';
+    const NOME_TEMPORARIO = 'tmp_name';
     const TAMANHO = 'size';
     const KILOBYTE = 1024;
     const TAMANHO_MAXIMO = 500 * self::KILOBYTE;
-
-    // verifica se foi feito o upload
-    public static function existeUpload($arquivoUpload)
-    {
-        return $arquivoUpload != null
-            && $arquivoUpload[self::TAMANHO] > 0;
-    }
 
     // verifica se tudo é valido
     public static function isValida($arquivo)
@@ -27,12 +20,19 @@ class DW3ImagemUpload
         /* verifica se é uma imagem
            pode ocorrer falso positivo */
         return self::existeUpload($arquivoUpload)
-            && getimagesize($arquivoUpload[self::ARQUIVO_NOME]);
+            && getimagesize($arquivoUpload[self::NOME_TEMPORARIO]);
+    }
+
+    // verifica se foi feito o upload
+    public static function existeUpload($arquivoUpload)
+    {
+        return $arquivoUpload != null
+            && $arquivoUpload[self::TAMANHO] > 0;
     }
 
     public static function salvar($arquivo, $destino)
     {
-        move_uploaded_file($arquivo[self::ARQUIVO_NOME], $destino);
+        move_uploaded_file($arquivo[self::NOME_TEMPORARIO], $destino);
     }
 
     /* Verifica se existe a imagem já salva na pasta img */

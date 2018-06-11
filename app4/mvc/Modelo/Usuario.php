@@ -40,9 +40,9 @@ class Usuario extends Modelo
 
     public function getImagem()
     {
-        $imagemNome = "{$this->id}.jpg";
+        $imagemNome = "{$this->id}.png";
         if (!DW3ImagemUpload::existe($imagemNome)) {
-            $imagemNome = "padrao.png";
+            $imagemNome = 'padrao.png';
         }
         return $imagemNome;
     }
@@ -86,7 +86,7 @@ class Usuario extends Modelo
     private function salvarImagem()
     {
         if (DW3ImagemUpload::isValida($this->foto)) {
-            $nomeCompleto = PASTA_PUBLICO . "img/{$this->id}.jpg";
+            $nomeCompleto = PASTA_PUBLICO . "img/{$this->id}.png";
             DW3ImagemUpload::salvar($this->foto, $nomeCompleto);
         }
     }

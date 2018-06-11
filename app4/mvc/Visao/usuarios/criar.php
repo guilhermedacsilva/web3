@@ -13,7 +13,7 @@
                 <input id="senha" name="senha" class="form-control" type="password">
             </div>
             <div class="form-group <?= $this->getErroCss('foto') ?>">
-                <label class="control-label" for="foto">Foto</label>
+                <label class="control-label" for="foto">Foto (somente PNG)</label>
                 <?php $this->incluirVisao('util/formErro.php', ['campo' => 'foto']) ?>
                 <input id="foto" name="foto" class="form-control" type="file">
             </div>

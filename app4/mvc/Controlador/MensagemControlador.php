@@ -6,18 +6,24 @@ use \Modelo\Mensagem;
 
 class MensagemControlador extends Controlador
 {
-    public function index()
+    private function calcularPaginacao()
     {
-        $this->verificarLogado();
         $pagina = array_key_exists('p', $_GET) ? intval($_GET['p']) : 1;
         $limit = 4;
         $offset = ($pagina - 1) * $limit;
         $mensagens = Mensagem::buscarTodos($limit, $offset);
         $ultimaPagina = ceil(Mensagem::contarTodos() / $limit);
+        return compact('pagina', 'mensagens', 'ultimaPagina');
+    }
+
+    public function index()
+    {
+        $this->verificarLogado();
+        $paginacao = $this->calcularPaginacao();
         $this->visao('mensagens/index.php', [
-            'mensagens' => $mensagens,
-            'pagina' => $pagina,
-            'ultimaPagina' => $ultimaPagina,
+            'mensagens' => $paginacao['mensagens'],
+            'pagina' => $paginacao['pagina'],
+            'ultimaPagina' => $paginacao['ultimaPagina'],
             'mensagemFlash' => DW3Sessao::getFlash('mensagemFlash')
         ]);
     }
@@ -35,9 +41,13 @@ class MensagemControlador extends Controlador
             $this->redirecionar(URL_RAIZ . 'mensagens');
 
         } else {
+            $paginacao = $this->calcularPaginacao();
             $this->setErros($mensagem->getValidacaoErros());
             $this->visao('mensagens/index.php', [
-                'mensagens' => Mensagem::buscarTodos()
+                'mensagens' => $paginacao['mensagens'],
+                'pagina' => $paginacao['pagina'],
+                'ultimaPagina' => $paginacao['ultimaPagina'],
+                'mensagemFlash' => DW3Sessao::getFlash('mensagemFlash')
             ]);
         }
     }
@@ -49,6 +59,8 @@ class MensagemControlador extends Controlador
         if ($mensagem->getUsuarioId() == $this->getUsuario()) {
             Mensagem::destruir($id);
             DW3Sessao::setFlash('mensagemFlash', 'Mensagem destruida.');
+        } else {
+            DW3Sessao::setFlash('mensagemFlash', 'Você não pode deletar as mensagens dos outros.');
         }
         $this->redirecionar(URL_RAIZ . 'mensagens');
     }
