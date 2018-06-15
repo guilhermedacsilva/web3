@@ -6,7 +6,7 @@ use \Framework\DW3BancoDeDados;
 
 class RelatorioVenda
 {
-    const BUSCAR_TODOS = 'SELECT p.nome as produto, v.quantidade, v.preco_total FROM vendas v JOIN produtos p ON (p.id = v.produto_id) WHERE 1=1';
+    const BUSCAR_TODOS = 'SELECT p.nome as produto, v.quantidade, v.preco_total FROM vendas v JOIN produtos p ON (p.id = v.produto_id) WHERE TRUE';
 
     public static function buscarRegistros($filtro = [])
     {
