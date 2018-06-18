@@ -19,7 +19,7 @@ class Usuario extends Modelo
         $email,
         $senha,
         $foto = null,
-        $id = 0
+        $id = null
     ) {
         $this->id = $id;
         $this->email = $email;
