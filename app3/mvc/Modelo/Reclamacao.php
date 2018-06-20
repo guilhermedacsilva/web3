@@ -26,7 +26,7 @@ class Reclamacao extends Modelo
         $id = null,
         $dataAtendimento = null
     ) {
-        $this->dataIncidente = $dataIncidente;
+        $this->setDataIncidente($dataIncidente);
         $this->local = $local;
         $this->descricao = $descricao;
         $this->usuarioId = $usuarioId;
@@ -68,6 +68,15 @@ class Reclamacao extends Modelo
             $this->usuario = Usuario::buscarId($this->usuarioId);
         }
         return $this->usuario;
+    }
+
+    public function setDataIncidente($dataIncidente)
+    {
+        $isBrasileiro = preg_match('/(\d\d)\/(\d\d)\/(\d\d\d\d)/', $dataIncidente, $matches);
+        if ($isBrasileiro) {
+            $dataIncidente = "$matches[3]-$matches[2]-$matches[1]";
+        }
+        $this->dataIncidente = $dataIncidente;
     }
 
     public function setDataAtendimento()
