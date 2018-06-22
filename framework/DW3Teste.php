@@ -30,28 +30,28 @@ abstract class DW3Teste
     protected function verificar($condicao)
     {
         if (!$condicao) {
-            throw new \Exception();
+            throw new VerificarException();
         }
     }
 
     protected function verificarContem($resposta, $texto)
     {
         if (strpos($resposta['html'], $texto) === false) {
-            throw new \Exception();
+            throw new VerificarException();
         }
     }
 
     protected function verificarNaoContem($resposta, $texto)
     {
         if (strpos($resposta['html'], $texto) !== false) {
-            throw new \Exception();
+            throw new VerificarException();
         }
     }
 
     protected function verificarRedirecionar($resposta, $url)
     {
         if ($resposta['redirecionar'] !== $url) {
-            throw new \Exception();
+            throw new VerificarException();
         }
     }
 
