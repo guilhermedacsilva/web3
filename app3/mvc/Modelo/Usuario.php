@@ -48,12 +48,6 @@ class Usuario extends Modelo
         $this->nome = $nome;
     }
 
-    public function setSenha($senhaPlana)
-    {
-        $this->senhaPlana = $senhaPlana;
-        $this->senha = password_hash($senhaPlana, PASSWORD_BCRYPT);
-    }
-
     public function verificarSenha($senhaPlana)
     {
         return password_verify($senhaPlana, $this->senha);

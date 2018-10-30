@@ -4,7 +4,7 @@
         <form action="<?= URL_RAIZ . 'usuarios' ?>" method="post" class="margin-bottom">
             <div class="form-group">
                 <label class="control-label" for="nome">Nome *</label>
-                <input id="nome" name="nome" class="form-control" autofocus value="<?= $this->getPost('nome') ?>">
+                <input id="nome" name="nome" class="form-control" autofocus>
             </div>
             <div class="form-group">
                 <label class="control-label" for="senha">Senha *</label>
