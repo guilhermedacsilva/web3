@@ -42,7 +42,7 @@ class DW3Testador
         $erros = 0;
         try {
             $objetoTeste->$metodo();
-        } catch (VerificarException $e) {
+        } catch (DW3VerificarException $e) {
             echo "\n    Erro linha: " . $e->getTrace()[0]['line'];
             $erros = 1;
         } catch (\Exception $e) {
