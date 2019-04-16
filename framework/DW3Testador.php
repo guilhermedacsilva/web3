@@ -58,6 +58,9 @@ class DW3Testador
     /* Retorna os nomes das classes que comecem com 'Teste' */
     private function procurarClassesTeste($pasta)
     {
+        if (!is_dir($pasta)) {
+            return [];
+        }
         $arquivos = scandir($pasta);
         $arquivos = array_filter($arquivos, function($arquivo) {
             return iniciaCom($arquivo, 'Teste');
