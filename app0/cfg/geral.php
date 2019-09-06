@@ -24,8 +24,8 @@ const PASTA_PUBLICO = PASTA_RAIZ . 'publico/';
 
 const PASTA_TESTE = PASTA_RAIZ . 'teste/';
 
-const URL_PUBLIC = URL_RAIZ . 'publico/';
-const URL_CSS = URL_PUBLIC . 'css/';
-const URL_FONTS = URL_PUBLIC . 'fonts/';
-const URL_IMG = URL_PUBLIC . 'img/';
-const URL_JS = URL_PUBLIC . 'js/';
+const URL_PUBLICO = URL_RAIZ . 'publico/';
+const URL_CSS = URL_PUBLICO . 'css/';
+const URL_FONTS = URL_PUBLICO . 'fonts/';
+const URL_IMG = URL_PUBLICO . 'img/';
+const URL_JS = URL_PUBLICO . 'js/';
