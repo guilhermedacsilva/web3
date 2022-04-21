@@ -1,4 +1,4 @@
-# Framework Desenvolvimentp para Web 3 (DW3)
+# Framework Desenvolvimento para Web 3 (DW3)
 
 Framework usado para ensinar PHP na universidade. Ele é composto por 14 classes em seu núcleo. Além disso, é necessário seguir a estrutura da pastas do projeto. O framework foi criado com base no Laravel, seguindo uma padronização bem parecida. Como o objetivo é ensinar PHP e web, o framework traz poucas funcionalidades, fazendo com que o aluno tenha que implementar bastante coisa. A ideia é fazer com que aluno aprenda o básico sobre programação em PHP e frameworks, para futuramente aprender o Laravel.
 
