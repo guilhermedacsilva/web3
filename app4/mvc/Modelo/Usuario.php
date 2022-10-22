@@ -17,15 +17,17 @@ class Usuario extends Modelo
 
     public function __construct(
         $email,
-        $senha,
+        $senhaPlana,
         $foto = null,
         $id = null
     ) {
         $this->id = $id;
         $this->email = $email;
         $this->foto = $foto;
-        $this->senhaPlana = $senha;
-        $this->senha = password_hash($senha, PASSWORD_BCRYPT);
+        $this->senhaPlana = $senhaPlana;
+        if ($senhaPlana != null) {
+            $this->senha = password_hash($senhaPlana, PASSWORD_BCRYPT);
+        }
     }
 
     public function getId()

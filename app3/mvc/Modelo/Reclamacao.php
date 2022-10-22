@@ -72,8 +72,8 @@ class Reclamacao extends Modelo
 
     public function setDataIncidente($dataIncidente)
     {
-        $isBrasileiro = preg_match('/(\d\d)\/(\d\d)\/(\d\d\d\d)/', $dataIncidente, $matches);
-        if ($isBrasileiro) {
+        $isFormatoBrasileiro = preg_match('/(\d{2})\/(\d{2})\/(\d{4})/', $dataIncidente, $matches);
+        if ($isFormatoBrasileiro) {
             $dataIncidente = "$matches[3]-$matches[2]-$matches[1]";
         }
         $this->dataIncidente = $dataIncidente;
@@ -130,6 +130,14 @@ class Reclamacao extends Modelo
         );
     }
 
+    /* Atenção. Este método busca somente as informações da tabela reclamacoes.
+    Na visão, eu vou exibir o nome do usuário que fez a reclamação.
+    Para cada reclamação, será executada uma query para buscar o nome do usuário.
+    Isso causará o problema conhecido como: query N+1.
+    N é a quantidade de reclamações. Se existirem 10 reclamações. Serão necessárias,
+    no total, 11 consultas no banco para trazer as reclamações e os nomes dos usuários.
+    Na aplicação 4 é mostrado como se resolve esse problema.
+    */
     public static function buscarNaoAtendidos()
     {
         $registros = DW3BancoDeDados::query(self::BUSCAR_NAO_ATENDIDOS);

@@ -23,7 +23,9 @@ class Usuario extends Modelo
     ) {
         $this->nome = $nome;
         $this->senhaPlana = $senhaPlana;
-        $this->senha = password_hash($senhaPlana, PASSWORD_BCRYPT);
+        if ($senhaPlana != null) {
+            $this->senha = password_hash($senhaPlana, PASSWORD_BCRYPT);
+        }
         $this->id = $id;
         $this->admin = $admin;
     }

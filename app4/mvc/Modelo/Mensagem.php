@@ -82,6 +82,11 @@ class Mensagem extends Modelo
         return $objeto;
     }
 
+    /* Além de buscar as mensagens, eu também busco, na mesma consulta,
+    os dados dos usuários, usando um JOIN. Essa é a forma correta de
+    resolver o problema: query N+1. Com apenas uma consulta no banco
+    eu busco tudo que eu preciso.
+    */
     public static function buscarTodos($limit = 4, $offset = 0)
     {
         $comando = DW3BancoDeDados::prepare(self::BUSCAR_TODOS);
